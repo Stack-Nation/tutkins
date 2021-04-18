@@ -9,28 +9,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{{config("app.name")}} | @yield("title")</title>
 
-        <!-- Prevent the demo from appearing in search engines -->
-        <meta name="robots" content="noindex">
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CRoboto:400,500%7CExo+2:600&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset("assets/main/assets/images/favicon.png")}}">
+        <link href="{{asset("assets/main/css/style.css")}}" rel="stylesheet">
 
-        <link type="text/css" href="{{asset("assets/main/vendor/spinkit.css")}}" rel="stylesheet">
-
-        <!-- Perfect Scrollbar -->
-        <link type="text/css" href="{{asset("assets/main/vendor/perfect-scrollbar.css")}}" rel="stylesheet">
-
-        <!-- Material Design Icons -->
-        <link type="text/css" href="{{asset("assets/main/css/material-icons.css")}}" rel="stylesheet">
-
-        <!-- Font Awesome Icons -->
-        <link type="text/css" href="{{asset("assets/main/css/fontawesome.css")}}" rel="stylesheet">
-
-        <!-- Preloader -->
-        <link type="text/css" href="{{asset("assets/main/css/preloader.css")}}" rel="stylesheet">
-
-        <!-- App CSS -->
-        <link type="text/css" href="{{asset("assets/main/css/app.css")}}" rel="stylesheet">
         <link type="text/css" href="{{asset("assets/toastr/toastr.min.css")}}" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="{{asset("assets/main/css/toastr.css")}}"/>
         <style>  
             .ck-editor__editable {height: 150px;}
         </style>
@@ -38,75 +20,89 @@
         @yield('head')
     </head>
 
-    <body class="layout-app ">
-
-        <div class="preloader">
-            <div class="sk-chase">
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
+    <body>
+    
+        <!--*******************
+            Preloader start
+        ********************-->
+        <div id="preloader">
+            <div class="loader">
+                <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+                </svg>
             </div>
         </div>
+        <!--*******************
+            Preloader end
+        ********************-->
 
-        <!-- Drawer Layout -->
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
 
-        <div class="mdk-drawer-layout js-mdk-drawer-layout"
-             data-push
-             data-responsive-width="992px">
-            <div class="mdk-drawer-layout__content page-content">
+        <!--**********************************
+            Header start
+        ***********************************-->
+        @include("includes.navbar")
+        <!--**********************************
+            Header end
+        ***********************************-->
 
-                <!-- Navbar -->
-                    @include('includes.navbar')
-                <!-- // END Navbar -->
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
 
-                <!-- BEFORE Page Content -->
-
-                <!-- // END BEFORE Page Content -->
-
-                <!-- Page Content -->
-                    @yield('content')
-                <!-- // END Page Content -->
-                @include('includes.footer')
-
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body" style="margin-left:0">
+            <div class="container-fluid">
+                @yield('content')
             </div>
-
-            <!-- // END drawer-layout__content -->
-
-            <!-- Drawer -->
-                {{-- Sidebar here --}}
-            <!-- // END Drawer -->
-
         </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        @include('includes.footer')
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
         @yield("modals")
+        <script src="{{asset("assets/main/assets/plugins/common/common.min.js")}}"></script>
+        <script src="{{asset("assets/main/js/custom.min.js")}}"></script>
+        <script src="{{asset("assets/main/js/settings.js")}}"></script>
+        <script src="{{asset("assets/main/js/gleek.js")}}"></script>
+        <script src="{{asset("assets/main/js/styleSwitcher.js")}}"></script>
+        
+        <!-- Chartjs chart -->
+        <script src="{{asset("assets/main/assets/plugins/chart.js/Chart.bundle.min.js")}}"></script>
+        <script src="{{asset("assets/main/assets/plugins/d3v3/index.js")}}"></script>
+        <script src="{{asset("assets/main/assets/plugins/topojson/topojson.min.js")}}"></script>
+        <script src="{{asset("assets/main/assets/plugins/datamaps/datamaps.world.min.js")}}"></script>
 
-        <!-- // END Drawer Layout -->
+        <script src="{{asset("assets/main/js/plugins-init/datamap-world-init.js")}}"></script>
 
-        <!-- jQuery -->
-        <script src="{{asset("assets/main/vendor/jquery.min.js")}}"></script>
+        <script src="{{asset("assets/main/assets/plugins/datamaps/datamaps.usa.min.js")}}"></script>
 
-        <!-- Bootstrap -->
-        <script src="{{asset("assets/main/vendor/popper.min.js")}}"></script>
-        <script src="{{asset("assets/main/vendor/bootstrap.min.js")}}"></script>
+        <script src="{{asset("assets/main/js/dashboard/dashboard-1.js")}}"></script>
 
-        <!-- Perfect Scrollbar -->
-        <script src="{{asset("assets/main/vendor/perfect-scrollbar.min.js")}}"></script>
-
-        <!-- DOM Factory -->
-        <script src="{{asset("assets/main/vendor/dom-factory.js")}}"></script>
-
-        <!-- MDK -->
-        <script src="{{asset("assets/main/vendor/material-design-kit.js")}}"></script>
-
-        <!-- App JS -->
-        <script src="{{asset("assets/main/js/app.js")}}"></script>
-
-        <!-- Preloader -->
-        <script src="{{asset("assets/main/js/preloader.js")}}"></script>
+        <script src="{{asset("assets/main/js/plugins-init/datamap-usa-init.js")}}"></script>
         <script src="{{asset("assets/toastr/toastr.min.js")}}"></script>
-        <script src="{{asset("assets/main/js/toastr.js")}}"></script>
         {{--toastr--}}
         <script>
             @if(Session()->has('success'))

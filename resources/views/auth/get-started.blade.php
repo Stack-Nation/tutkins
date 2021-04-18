@@ -5,16 +5,13 @@
     <div class="container page__container">
         <div class="row d-flex justify-content-center">
             <div class="col-md-8 mb-3">
-                <a href="{{route("register","Mentee")}}" class="btn btn-default btn-outline-dark btn-block">Mentee</a>
+                <a href="{{route("register","Kid")}}" class="btn btn-default btn-outline-dark btn-block">Kid-Parent</a>
             </div>
             <div class="col-md-8 mb-3">
-                <a href="{{route("register","Instructor")}}" class="btn btn-default btn-outline-dark btn-block">Instructor</a>
+                <a href="{{route("register","Trainer")}}" class="btn btn-default btn-outline-dark btn-block">Trainer</a>
             </div>
             <div class="col-md-8 mb-3">
-                <a href="{{route("register","Organisation")}}" class="btn btn-default btn-outline-dark btn-block">Organisation</a>
-            </div>
-            <div class="col-md-8 mb-3">
-                <a href="{{route("register","Institution")}}" class="btn btn-default btn-outline-dark btn-block">Institution</a>
+                <a href="{{route("register","Organizer")}}" class="btn btn-default btn-outline-dark btn-block">Organizer</a>
             </div>
         </div>
     </div>

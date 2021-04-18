@@ -9,21 +9,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{{config("app.name")}} | @yield("title")</title>
 
-        <!-- Prevent the demo from appearing in search engines -->
-        <meta name="robots" content="noindex">
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CRoboto:400,500%7CExo+2:600&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset("assets/main/assets/images/favicon.png")}}">
+        <link href="{{asset("assets/main/css/style.css")}}" rel="stylesheet">
 
-	    <!-- Vendors Style-->
-        <link rel="stylesheet" href="{{asset("assets/dashboard/css/vendors_css.css")}}">
-        
-        <!-- Style-->  
-        <link rel="stylesheet" href="{{asset("assets/dashboard/css/style.css")}}">
-        <link rel="stylesheet" href="{{asset("assets/dashboard/css/skin_color.css")}}">
-        <link type="text/css" href="{{asset("assets/main/css/fontawesome.css")}}" rel="stylesheet">
-        <link type="text/css" href="{{asset("assets/main/css/material-icons.css")}}" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link type="text/css" href="{{asset("assets/toastr/toastr.min.css")}}" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="{{asset("assets/main/css/toastr.css")}}"/>
         <style>  
             .ck-editor__editable {height: 150px;}
         </style>
@@ -31,74 +20,107 @@
         @yield('head')
     </head>
 
-    <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
-
-        <div class="wrapper">
-            <div id="loader"></div>
-
-                <!-- Navbar -->
-                    @include('includes.auth-header')
-                <!-- // END Navbar -->
-            <!-- Drawer -->
-                @if(Auth::user()->role==="Admin")
-                    @include('includes.admin-sidebar')
-                @endif
-                @if(Auth::user()->role==="Instructor")
-                    @include('includes.instructor-sidebar')
-                @endif
-                @if(Auth::user()->role==="Mentee")
-                    @include('includes.mentee-sidebar')
-                @endif
-                @if(Auth::user()->role==="Manager")
-                    @include('includes.manager-sidebar')
-                @endif
-                @if(Auth::user()->role==="Organisation")
-                    @include('includes.org-sidebar')
-                @endif
-                @if(Auth::user()->role==="Institution")
-                    @include('includes.inst-sidebar')
-                @endif
-
-                <!-- Page Content -->
-                <!-- Content Wrapper. Contains page content -->
-                <div class="content-wrapper">
-                    <div class="container-full">
-                        <section class="content">
-                            <div class="row">
-                                <div class="col-xl-12 col-12">
-                                    @yield('content')
-                                    <div class="mt-4">
-                                        @include('includes.footer')
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-                <!-- // END Page Content -->
-
-            </div>
-
-            <!-- // END drawer-layout__content -->
-        @yield("modals")
-        <!-- // END Drawer Layout -->
-	
-	<!-- Vendor JS -->
-        <script src="{{asset("assets/dashboard/js/vendors.min.js")}}"></script>
-        <script src="{{asset("assets/dashboard/js/pages/chat-popup.js")}}"></script>
-        <script src="{{asset("assets/assets/icons/feather-icons/feather.min.js")}}"></script>
+    <body>
     
-        <script src="{{asset("assets/assets/vendor_components/apexcharts-bundle/dist/apexcharts.js")}}"></script>
-        <script src="{{asset("assets/assets/vendor_components/moment/min/moment.min.js")}}"></script>
-        <script src="{{asset("assets/assets/vendor_components/fullcalendar/fullcalendar.js")}}"></script>
+        <!--*******************
+            Preloader start
+        ********************-->
+        <div id="preloader">
+            <div class="loader">
+                <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
+        <!--*******************
+            Preloader end
+        ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        @include('includes.auth-header')
+        <!--**********************************
+            Header end
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+            @if(Auth::user()->role==="Admin")
+                @include('includes.admin-sidebar')
+            @endif
+            @if(Auth::user()->role==="Instructor")
+                @include('includes.instructor-sidebar')
+            @endif
+            @if(Auth::user()->role==="Mentee")
+                @include('includes.mentee-sidebar')
+            @endif
+            @if(Auth::user()->role==="Manager")
+                @include('includes.manager-sidebar')
+            @endif
+            @if(Auth::user()->role==="Organisation")
+                @include('includes.org-sidebar')
+            @endif
+            @if(Auth::user()->role==="Institution")
+                @include('includes.inst-sidebar')
+            @endif
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                @yield('content')
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
         
-        <!-- EduAdmin App -->
-        <script src="{{asset("assets/dashboard/js/template.js")}}"></script>
-        <script src="{{asset("assets/main/vendor/material-design-kit.js")}}"></script>
-        <script src="{{asset("assets/dashboard/js/pages/dashboard.js")}}"></script>
-        <script src="{{asset("assets/dashboard/js/pages/calendar.js")}}"></script>
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        @include('includes.footer')
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+        @yield("modals")
+        <script src="{{asset("assets/main/assets/plugins/common/common.min.js")}}"></script>
+        <script src="{{asset("assets/main/js/custom.min.js")}}"></script>
+        <script src="{{asset("assets/main/js/settings.js")}}"></script>
+        <script src="{{asset("assets/main/js/gleek.js")}}"></script>
+        <script src="{{asset("assets/main/js/styleSwitcher.js")}}"></script>
+        
+        <!-- Chartjs chart -->
+        <script src="{{asset("assets/main/assets/plugins/chart.js/Chart.bundle.min.js")}}"></script>
+        <script src="{{asset("assets/main/assets/plugins/d3v3/index.js")}}"></script>
+        <script src="{{asset("assets/main/assets/plugins/topojson/topojson.min.js")}}"></script>
+        <script src="{{asset("assets/main/assets/plugins/datamaps/datamaps.world.min.js")}}"></script>
+
+        <script src="{{asset("assets/main/js/plugins-init/datamap-world-init.js")}}"></script>
+
+        <script src="{{asset("assets/main/assets/plugins/datamaps/datamaps.usa.min.js")}}"></script>
+
+        <script src="{{asset("assets/main/js/dashboard/dashboard-1.js")}}"></script>
+
+        <script src="{{asset("assets/main/js/plugins-init/datamap-usa-init.js")}}"></script>
         <script src="{{asset("assets/toastr/toastr.min.js")}}"></script>
-        <script src="{{asset("assets/main/js/toastr.js")}}"></script>
         {{--toastr--}}
         <script>
             @if(Session()->has('success'))
