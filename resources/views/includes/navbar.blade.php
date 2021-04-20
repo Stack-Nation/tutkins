@@ -26,14 +26,14 @@
                                     Admin Dashboard
                                 </a>
                                 @endif
-                                @if(Auth::user()->role==="Instructor")
-                                <a class="dropdown-item" href="{{route("instructor.dashboard")}}">
-                                    Instructor Dashboard
+                                @if(Auth::user()->role==="Kid")
+                                <a class="dropdown-item" href="{{route("kid.dashboard")}}">
+                                    Kid Dashboard
                                 </a>
                                 @endif
-                                @if(Auth::user()->role==="Mentee")
-                                <a class="dropdown-item" href="{{route("mentee.dashboard")}}">
-                                    Mentee Dashboard
+                                @if(Auth::user()->role==="Trainer")
+                                <a class="dropdown-item" href="{{route("trainer.dashboard")}}">
+                                    Trainer Dashboard
                                 </a>
                                 @endif
                                 @if(Auth::user()->role==="Manager")
@@ -41,14 +41,9 @@
                                     Manager Dashboard
                                 </a>
                                 @endif
-                                @if(Auth::user()->role==="Organisation")
-                                <a class="dropdown-item" href="{{route("organisation.dashboard")}}">
-                                    Organisation Dashboard
-                                </a>
-                                @endif
-                                @if(Auth::user()->role==="Institution")
-                                <a class="dropdown-item" href="{{route("institution.dashboard")}}">
-                                    Institution Dashboard
+                                @if(Auth::user()->role==="Organiser")
+                                <a class="dropdown-item" href="{{route("organiser.dashboard")}}">
+                                    Organiser Dashboard
                                 </a>
                                 @endif
                                 <a class="dropdown-item" href="{{route("user.settings")}}">

@@ -29,4 +29,7 @@ class SettingController extends Controller
             return redirect()->back();
         }
     }
+    public function notVerified(){
+        return view("user.not-verified");
+    }
 }

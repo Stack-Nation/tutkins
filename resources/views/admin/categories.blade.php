@@ -7,10 +7,6 @@
 
     <div class="container page__container page-section">
 
-        <div class="page-separator">
-            <div class="page-separator__text">All Categories</div>
-        </div>
-
         <div class="card dashboard-area-tabs p-relative o-hidden mb-lg-32pt">
             <div class="card-header">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">Add a new category</button>

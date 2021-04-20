@@ -43,6 +43,21 @@
     <div id="main-wrapper">
 
         <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <div class="brand-logo"><a href="{{route("home")}}"><b><img src="{{asset("assets/main/assets/images/logo.png")}}" alt=""> </b><span class="brand-title text-white ">{{config("app.name")}}</span></a>
+            </div>
+            <div class="nav-control">
+                <div class="hamburger"><span class="line"></span>  <span class="line"></span>  <span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
             Header start
         ***********************************-->
         @include('includes.auth-header')

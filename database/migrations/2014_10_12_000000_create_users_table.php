@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('username')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('verified')->default(0);
             $table->string('password');
             $table->string('role');
             $table->string('mobile');
@@ -34,6 +35,8 @@ class CreateUsersTable extends Migration
             $table->string('aadhar')->nullable();
             $table->json('training')->nullable();
             $table->json('parent_info')->nullable();
+            $table->boolean('is_org')->default(0);
+            $table->boolean('is_trainer')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
