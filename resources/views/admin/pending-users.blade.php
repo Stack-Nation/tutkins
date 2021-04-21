@@ -1,19 +1,17 @@
 @extends('layouts.authApp')
-@section("title","Admin Users")
+@section("title","Admin Pending Users")
 @section('content')
 <!-- Content Header (Page header) -->	  
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">User list</h3>
+            <h3 class="page-title">Pending User list</h3>
         </div>
         
     </div>
     <select name="role" class="custom-select mb-3 d-block" id="role" onchange="getType(this);">
         <option value="Users" @if($type==="User") selected @endif>All Users</option>
-        <option value="Admin" @if($type==="Admin") selected @endif>Admins</option>
         <option value="Trainer" @if($type==="Trainer") selected @endif>Trainers</option>
-        <option value="Kid" @if($type==="Kid") selected @endif>Kids</option>
         <option value="Organiser" @if($type==="Organiser") selected @endif>Organisers</option>
     </select>
 </div>  
@@ -37,7 +35,18 @@
                     </p>
                     <p>{{$user->role}}</p>
                   </div>
+                  <form action="{{route("admin.users.approve")}}" method="POST">
+                      @csrf
+                      <input type="hidden" name="id" value="{{$user->id}}">
+                      <button class="btn btn-success btn-sm">Approve</button>
+                  </form>
+                  <form action="{{route("admin.users.deny")}}" method="POST">
+                      @csrf
+                      <input type="hidden" name="id" value="{{$user->id}}">
+                      <button class="btn btn-danger btn-sm">Deny</button>
+                  </form>
                 </div>
+                <hr/>
                 @endforeach
                 @endif
               </div>

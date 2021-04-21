@@ -71,4 +71,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Message::class, 'receiver_id');
     }
+    /**
+     * Get all of the programs for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function programs(): HasMany
+    {
+        return $this->hasMany(Program::class, 'trainer_id');
+    }
 }

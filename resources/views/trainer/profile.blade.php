@@ -1,5 +1,5 @@
 @extends('layouts.authApp')
-@section("title","Trainer Dashboard")
+@section("title","Trainer Profile")
 @section('content')
 <div class="row">
     <div class="col-12">

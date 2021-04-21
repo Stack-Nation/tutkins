@@ -15,6 +15,11 @@
         <i class="mdi mdi-human"></i> <span class="nav-text">Users</span>
     </a>
 </li>
+<li class="@if(Request::route()->getName()==="admin.users.pending") active @endif">
+    <a class="has-arrow" href="{{route("admin.users.pending")}}" aria-expanded="false">
+        <i class="mdi mdi-human"></i> <span class="nav-text">Pending Users</span>
+    </a>
+</li>
 <li class="@if(Request::route()->getName()==="admin.managers") active @endif">
     <a class="has-arrow" href="{{route("admin.managers")}}" aria-expanded="false">
         <i class="mdi mdi-human"></i> <span class="nav-text">Manager</span>

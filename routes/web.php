@@ -20,6 +20,7 @@ use App\Http\Controllers\Kid\DashboardController as KidDashboard;
 // Trainer
 use App\Http\Controllers\Trainer\DashboardController as TrainerDashboard;
 use App\Http\Controllers\Trainer\ProfileController as TrainerProfile;
+use App\Http\Controllers\Trainer\ProgramController as TrainerProgram;
 
 // Organiser
 use App\Http\Controllers\Organiser\DashboardController as OrganiserDashboard;
@@ -74,6 +75,9 @@ Route::middleware(["auth","verified"])->group(function(){
     Route::middleware(["adminAuth"])->name("admin.")->prefix("admin")->group(function(){
         Route::get("dashboard",[AdminDashboard::class,"index"])->name("dashboard");
         Route::get("users/{type?}",[AdminUser::class,"index"])->name("users");
+        Route::get("pending-users/{type?}",[AdminUser::class,"pending"])->name("users.pending");
+        Route::post("pending-users/approve",[AdminUser::class,"approve"])->name("users.approve");
+        Route::post("pending-users/deny",[AdminUser::class,"deny"])->name("users.deny");
 
         Route::get("managers",[AdminManager::class,"index"])->name("managers");
         Route::post("manager/create",[AdminManager::class,"create"])->name("manager.create");
@@ -89,6 +93,7 @@ Route::middleware(["auth","verified"])->group(function(){
     Route::middleware(["adminAuth"])->name("manager.")->prefix("manager")->group(function(){
         Route::get("dashboard",[AdminDashboard::class,"index"])->name("dashboard");
         Route::get("users/{type?}",[AdminUser::class,"index"])->name("users");
+        Route::get("pending-users/{type?}",[AdminUser::class,"pending"])->name("users.pending");
 
         Route::get("categories",[AdminCategory::class,"index"])->name("categories");
         Route::post("category/create",[AdminCategory::class,"create"])->name("category.create");
@@ -102,6 +107,13 @@ Route::middleware(["auth","verified"])->group(function(){
         Route::post("profile",[TrainerProfile::class,"update"])->name("profile");
         Route::middleware(["approved"])->group(function(){
             Route::get("dashboard",[TrainerDashboard::class,"index"])->name("dashboard");
+
+            Route::get("programs",[TrainerProgram::class,"index"])->name("programs");
+            Route::get("programs/create",[TrainerProgram::class,"create"])->name("programs.create");
+            Route::post("programs/create",[TrainerProgram::class,"store"])->name("programs.create");
+            Route::get("programs/edit/{id}",[TrainerProgram::class,"edit"])->name("programs.edit");
+            Route::post("programs/edit/{id}",[TrainerProgram::class,"update"])->name("programs.edit");
+            Route::post("programs/delete",[TrainerProgram::class,"delete"])->name("programs.delete");
         });
     });
     Route::middleware(["organiserAuth"])->name("organiser.")->prefix("organiser")->group(function(){

@@ -10,4 +10,9 @@
         <i class="mdi mdi-menu"></i> <span class="nav-text">Profile</span>
     </a>
 </li>
+<li class="@if(Request::route()->getName()==="trainer.programs") active @endif">
+    <a class="has-arrow" href="{{route("trainer.programs")}}" aria-expanded="false">
+        <i class="mdi mdi-clipboard"></i> <span class="nav-text">Programs</span>
+    </a>
+</li>
 @endsection
