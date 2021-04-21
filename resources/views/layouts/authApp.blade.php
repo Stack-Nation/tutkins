@@ -71,8 +71,8 @@
             @if(Auth::user()->role==="Admin")
                 @include('includes.admin-sidebar')
             @endif
-            @if(Auth::user()->role==="Instructor")
-                @include('includes.instructor-sidebar')
+            @if(Auth::user()->role==="Trainer")
+                @include('includes.trainer-sidebar')
             @endif
             @if(Auth::user()->role==="Mentee")
                 @include('includes.mentee-sidebar')

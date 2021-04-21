@@ -19,6 +19,7 @@ use App\Http\Controllers\Kid\DashboardController as KidDashboard;
 
 // Trainer
 use App\Http\Controllers\Trainer\DashboardController as TrainerDashboard;
+use App\Http\Controllers\Trainer\ProfileController as TrainerProfile;
 
 // Organiser
 use App\Http\Controllers\Organiser\DashboardController as OrganiserDashboard;
@@ -97,6 +98,8 @@ Route::middleware(["auth","verified"])->group(function(){
         Route::get("dashboard",[KidDashboard::class,"index"])->name("dashboard");
     });
     Route::middleware(["trainerAuth"])->name("trainer.")->prefix("trainer")->group(function(){
+        Route::get("profile",[TrainerProfile::class,"index"])->name("profile");
+        Route::post("profile",[TrainerProfile::class,"update"])->name("profile");
         Route::middleware(["approved"])->group(function(){
             Route::get("dashboard",[TrainerDashboard::class,"index"])->name("dashboard");
         });

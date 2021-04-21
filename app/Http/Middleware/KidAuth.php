@@ -19,7 +19,7 @@ class KidAuth
     {
         if(Auth::user()->role!=="Kid"){
             $request->session()->flash('error', "Please login as a Kid to access the content");
-            return route("login");
+            return redirect()->route('home');
         }
         return $next($request);
     }

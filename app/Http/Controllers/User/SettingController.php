@@ -30,6 +30,6 @@ class SettingController extends Controller
         }
     }
     public function notVerified(){
-        return view("user.not-verified");
+        return view("users.not-verified");
     }
 }

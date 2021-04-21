@@ -66,6 +66,6 @@ class Kernel extends HttpKernel
         'kidAuth' => \App\Http\Middleware\KidAuth::class,
         'organiserAuth' => \App\Http\Middleware\OrganiserAuth::class,
         'trainerAuth' => \App\Http\Middleware\TrainerAuth::class,
-        'approved' => \App\Http\Middleware\Verified::class,
+        'approved' => \App\Http\Middleware\Approved::class,
     ];
 }

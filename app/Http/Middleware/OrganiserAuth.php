@@ -16,9 +16,9 @@ class OrganiserAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role!=="Organiser" or Auth::user()->is_trainer==0){
+        if(Auth::user()->role!=="Organiser" and Auth::user()->is_org==0){
             $request->session()->flash('error', "Please login as a Trainer to access this content");
-            return \route("login");
+            return redirect()->route('home');
         }
         return $next($request);
     }

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Auth;
 
-class Verified
+class Approved
 {
     /**
      * Handle an incoming request.
@@ -17,8 +17,8 @@ class Verified
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->verified===0){
-            return route("user.not-verified");
+        if(Auth::user()->approved===0){
+            return redirect()->route('user.not-verified');
         }
         return $next($request);
     }

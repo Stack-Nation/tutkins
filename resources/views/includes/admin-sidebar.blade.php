@@ -1,5 +1,4 @@
 @extends('layouts.sidebar')
-@section("name","Admin")
 @section('items')  
 <li class="@if(Request::route()->getName()==="admin.dashboard") active @endif">
     <a class="has-arrow" href="{{route("admin.dashboard")}}" aria-expanded="false">
