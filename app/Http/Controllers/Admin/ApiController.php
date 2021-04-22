@@ -12,13 +12,12 @@ class ApiController extends Controller
     public function index(){
         $apis = Api::get()->first();
         if($apis===NULL){
-            return "Please create an API table first";
+            $apis = new Api;
+            $apis->save();
         }
-        else{
-            return view("admin.api")->with([
-                "apis"=>$apis
-            ]);
-        }
+        return view("admin.api")->with([
+            "apis"=>$apis
+        ]);
     }
     public function update(Request $request){
         $this->validate($request,[
