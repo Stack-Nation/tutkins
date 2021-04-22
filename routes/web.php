@@ -24,6 +24,8 @@ use App\Http\Controllers\Trainer\ProgramController as TrainerProgram;
 
 // Organiser
 use App\Http\Controllers\Organiser\DashboardController as OrganiserDashboard;
+use App\Http\Controllers\Organiser\ProfileController as OrganiserProfile;
+use App\Http\Controllers\Organiser\EventController as OrganiserEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,8 +119,17 @@ Route::middleware(["auth","verified"])->group(function(){
         });
     });
     Route::middleware(["organiserAuth"])->name("organiser.")->prefix("organiser")->group(function(){
+        Route::get("profile",[OrganiserProfile::class,"index"])->name("profile");
+        Route::post("profile",[OrganiserProfile::class,"update"])->name("profile");
         Route::middleware(["approved"])->group(function(){
             Route::get("dashboard",[OrganiserDashboard::class,"index"])->name("dashboard");
+
+            Route::get("events",[OrganiserEvent::class,"index"])->name("events");
+            Route::get("events/create",[OrganiserEvent::class,"create"])->name("events.create");
+            Route::post("events/create",[OrganiserEvent::class,"store"])->name("events.create");
+            Route::get("events/edit/{id}",[OrganiserEvent::class,"edit"])->name("events.edit");
+            Route::post("events/edit/{id}",[OrganiserEvent::class,"update"])->name("events.edit");
+            Route::post("events/delete",[OrganiserEvent::class,"delete"])->name("events.delete");
         });
     });
 });

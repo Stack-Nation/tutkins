@@ -75,7 +75,7 @@
                 @include('includes.trainer-sidebar')
             @endif
             @if(Auth::user()->role==="Organiser")
-                @include('includes.organsier-sidebar')
+                @include('includes.organiser-sidebar')
             @endif
             @if(Auth::user()->role==="Manager")
                 @include('includes.manager-sidebar')

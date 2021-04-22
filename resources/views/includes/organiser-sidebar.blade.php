@@ -10,9 +10,9 @@
         <i class="mdi mdi-menu"></i> <span class="nav-text">Profile</span>
     </a>
 </li>
-<li class="@if(Request::route()->getName()==="organiser.programs") active @endif">
-    <a class="has-arrow" href="{{route("organiser.programs")}}" aria-expanded="false">
-        <i class="mdi mdi-clipboard"></i> <span class="nav-text">Programs</span>
+<li class="@if(Request::route()->getName()==="organiser.events") active @endif">
+    <a class="has-arrow" href="{{route("organiser.events")}}" aria-expanded="false">
+        <i class="mdi mdi-clipboard"></i> <span class="nav-text">Events</span>
     </a>
 </li>
 @endsection
