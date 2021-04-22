@@ -11,7 +11,7 @@
                 <a href="{{route("register","Trainer")}}" class="btn btn-default btn-outline-dark btn-block">Trainer</a>
             </div>
             <div class="col-md-8 mb-3">
-                <a href="{{route("register","Organizer")}}" class="btn btn-default btn-outline-dark btn-block">Organizer</a>
+                <a href="{{route("register","Organiser")}}" class="btn btn-default btn-outline-dark btn-block">Organiser</a>
             </div>
         </div>
     </div>

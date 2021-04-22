@@ -22,7 +22,7 @@ class RegisteredUserController extends Controller
      */
     public function create($role)
     {
-        $roles = ["Kid","Trainer","Organizer"];
+        $roles = ["Kid","Trainer","Organiser"];
         if(in_array($role,$roles)){
             return view('auth.register')->with([
                 "role"=>$role

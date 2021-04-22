@@ -74,17 +74,14 @@
             @if(Auth::user()->role==="Trainer")
                 @include('includes.trainer-sidebar')
             @endif
-            @if(Auth::user()->role==="Mentee")
-                @include('includes.mentee-sidebar')
+            @if(Auth::user()->role==="Organiser")
+                @include('includes.organsier-sidebar')
             @endif
             @if(Auth::user()->role==="Manager")
                 @include('includes.manager-sidebar')
             @endif
             @if(Auth::user()->role==="Organisation")
                 @include('includes.org-sidebar')
-            @endif
-            @if(Auth::user()->role==="Institution")
-                @include('includes.inst-sidebar')
             @endif
         <!--**********************************
             Sidebar end
