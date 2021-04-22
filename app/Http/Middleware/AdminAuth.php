@@ -21,7 +21,7 @@ class AdminAuth
             return $next($request);
         }
         else{
-            return redirect()->route("home");
+            abort(404);
         }
     }
 }
