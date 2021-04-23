@@ -20,6 +20,7 @@
                             <th>Number of classes</th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,7 @@
                                 <td>{{$program->mode}}</td>
                                 <td>{{$program->duration}}</td>
                                 <td>{{$program->classes}}</td>
+                                @if($program->mode=="Online")<td><a href="{{$program->link}}" class="btn btn-info btn-sm">Join Now</a></td>@endif
                                 <td>
                                     <a href="{{route("trainer.programs.edit",$program->id)}}" class="btn btn-success btn-sm">Edit</a>
                                 </td>

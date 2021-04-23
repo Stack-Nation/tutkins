@@ -6,8 +6,13 @@
           <div class="header-left">
               <ul>
                   <li class="icons @if(Request::route()->getName()=="home") active @endif">
-                      <a href="{{route("home")}}"
-                          class="nav-link">Home</a>
+                      <a href="{{route("home")}}" class="nav-link">Home</a>
+                  </li>
+                  <li class="icons @if(Request::route()->getName()=="programs.index") active @endif">
+                      <a href="{{route("programs.index")}}" class="nav-link">Programs</a>
+                  </li>
+                  <li class="icons @if(Request::route()->getName()=="events.index") active @endif">
+                      <a href="{{route("events.index")}}" class="nav-link">Events</a>
                   </li>
               </ul>
           </div>

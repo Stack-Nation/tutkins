@@ -170,7 +170,7 @@ class ProgramController extends Controller
                 $notification->user_id = $user->id;
                 $notification->message = "Your program ".$program->title." is successfully updated";
                 $notification->save();
-                $request->session()->flash('success', "Program created.");
+                $request->session()->flash('success', "Program updated.");
                 return redirect()->back();
             }
         }

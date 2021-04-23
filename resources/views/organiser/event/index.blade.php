@@ -1,5 +1,5 @@
 @extends('layouts.authApp')
-@section("title","Trainer Events")
+@section("title","Organiser Events")
 @section('content')
 <div class="row">
     <div class="col-12">
@@ -20,6 +20,7 @@
                             <th>Number of days</th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,7 @@
                                 <td>{{$event->mode}}</td>
                                 <td>{{$event->duration}}</td>
                                 <td>{{$event->days}}</td>
+                                @if($event->mode=="Online")<td><a href="{{$event->link}}" class="btn btn-info btn-sm">Join Now</a></td>@endif
                                 <td>
                                     <a href="{{route("organiser.events.edit",$event->id)}}" class="btn btn-success btn-sm">Edit</a>
                                 </td>

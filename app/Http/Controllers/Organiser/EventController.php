@@ -186,7 +186,7 @@ class EventController extends Controller
                 $notification->user_id = $user->id;
                 $notification->message = "Your event ".$event->title." is successfully updated";
                 $notification->save();
-                $request->session()->flash('success', "Event created.");
+                $request->session()->flash('success', "Event updated.");
                 return redirect()->back();
             }
         }

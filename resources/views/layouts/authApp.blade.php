@@ -13,6 +13,8 @@
         <link href="{{asset("assets/main/css/style.css")}}" rel="stylesheet">
 
         <link type="text/css" href="{{asset("assets/toastr/toastr.min.css")}}" rel="stylesheet" />
+        <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
+
         <style>  
             .ck-editor__editable {height: 150px;}
         </style>

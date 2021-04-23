@@ -1,5 +1,5 @@
 @extends('layouts.authApp')
-@section("title","Create a event")
+@section("title","Create an event")
 @section('head')
 <link rel="stylesheet" href="{{asset("assets/main/assets/plugins/select2/css/select2.min.css")}}">
 @endsection
@@ -8,7 +8,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Create a event</h2>
+                <h2 class="card-title">Create an event</h2>
             </div>
             <div class="card-body">
                 <form action="{{route("organiser.events.create")}}" onsubmit="checkImages(event)" method="post" enctype="multipart/form-data">

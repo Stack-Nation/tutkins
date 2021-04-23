@@ -27,6 +27,12 @@ use App\Http\Controllers\Organiser\DashboardController as OrganiserDashboard;
 use App\Http\Controllers\Organiser\ProfileController as OrganiserProfile;
 use App\Http\Controllers\Organiser\EventController as OrganiserEvent;
 
+// Program
+use App\Http\Controllers\Program\MainController as ProgramMain;
+
+// Event
+use App\Http\Controllers\Event\MainController as EventMain;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -132,6 +138,16 @@ Route::middleware(["auth","verified"])->group(function(){
             Route::post("events/delete",[OrganiserEvent::class,"delete"])->name("events.delete");
         });
     });
+});
+
+Route::name("programs.")->prefix("programs")->group(function() {
+    Route::get("/",[ProgramMain::class,"index"])->name("index");
+    Route::get("view/{id}/{title}",[ProgramMain::class,"view"])->name("view");
+});
+
+Route::name("events.")->prefix("events")->group(function() {
+    Route::get("/",[EventMain::class,"index"])->name("index");
+    Route::get("view/{id}/{title}",[EventMain::class,"view"])->name("view");
 });
 
 
