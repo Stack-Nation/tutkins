@@ -82,8 +82,8 @@
             @if(Auth::user()->role==="Manager")
                 @include('includes.manager-sidebar')
             @endif
-            @if(Auth::user()->role==="Organisation")
-                @include('includes.org-sidebar')
+            @if(Auth::user()->role==="Kid")
+                @include('includes.kid-sidebar')
             @endif
         <!--**********************************
             Sidebar end
