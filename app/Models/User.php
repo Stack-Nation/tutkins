@@ -80,4 +80,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Program::class, 'trainer_id');
     }
+    /**
+     * Get all of the enrolled_programs for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function enrolled_programs(): HasMany
+    {
+        return $this->hasMany(Program::class, 'user_id');
+    }
 }
