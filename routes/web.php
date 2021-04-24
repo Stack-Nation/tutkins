@@ -16,6 +16,9 @@ use App\Http\Controllers\Admin\ApiController as AdminApi;
 
 // Kid
 use App\Http\Controllers\Kid\DashboardController as KidDashboard;
+use App\Http\Controllers\Kid\ProfileController as KidProfile;
+use App\Http\Controllers\Kid\ProgramController as KidProgram;
+use App\Http\Controllers\Kid\EventController as KidEvent;
 
 // Trainer
 use App\Http\Controllers\Trainer\DashboardController as TrainerDashboard;
@@ -111,6 +114,12 @@ Route::middleware(["auth","verified"])->group(function(){
     });
     Route::middleware(["kidAuth"])->name("kid.")->prefix("kid")->group(function(){
         Route::get("dashboard",[KidDashboard::class,"index"])->name("dashboard");
+        
+        Route::get("profile",[KidProfile::class,"index"])->name("profile");
+        Route::post("profile",[KidProfile::class,"update"])->name("profile");
+
+        Route::get("programs",[KidProgram::class,"index"])->name("programs");
+        Route::get("events",[KidEvent::class,"index"])->name("events");
     });
     Route::middleware(["trainerAuth"])->name("trainer.")->prefix("trainer")->group(function(){
         Route::get("profile",[TrainerProfile::class,"index"])->name("profile");

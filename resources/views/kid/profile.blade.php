@@ -1,10 +1,10 @@
 @extends('layouts.authApp')
-@section("title","Trainer Profile")
+@section("title","Kid Profile")
 @section('content')
 <div class="row">
     <div class="col-12">
-        <h2>Trainer Profile</h2>
-        <form method="POST" action="{{ route('trainer.profile') }}" class="col-md-10 p-0 mx-auto" enctype="multipart/form-data">
+        <h2>Kid Profile</h2>
+        <form method="POST" action="{{ route('kid.profile') }}" class="col-md-10 p-0 mx-auto" enctype="multipart/form-data">
             <img src="{{asset("assets/users/photo/".($user->photo??"default.png"))}}" height="100px" width="100px" alt="photo" class="mb-3 rounded">
             @csrf
             <div class="form-group">
