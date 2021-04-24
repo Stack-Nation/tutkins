@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class EnrolledProgram extends Model
+class EnrolledEvent extends Model
 {
     use HasFactory;
-    protected $table = "enrolled_programs";
+    protected $table = "enrolled_events";
     /**
-     * Get the user that owns the EnrolledProgram
+     * Get the user that owns the EnrolledEvent
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -20,12 +20,12 @@ class EnrolledProgram extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
     /**
-     * Get the program that owns the EnrolledProgram
+     * Get the event that owns the EnrolledEvent
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function program(): BelongsTo
+    public function event(): BelongsTo
     {
-        return $this->belongsTo(Program::class, 'program_id');
+        return $this->belongsTo(Event::class, 'event_id');
     }
 }

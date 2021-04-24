@@ -17,7 +17,7 @@ class Approved
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->approved===0){
+        if((Auth::user()->role=="Trainer" || Auth::user()->role=="Organiser") and Auth::user()->approved===0){
             return redirect()->route('user.not-verified');
         }
         return $next($request);

@@ -143,10 +143,58 @@
                                 <p class="float-right">{{$program->price==0?"Free":$program->price." INR"}}</p>
                             </li>
                         </ul>
-                        <a href="#!" class="btn btn-success">Enroll Now</a>
+                        @auth
+                        @if(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()!==NULL)
+                            @if((new DateTime(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()->date." ".Auth::user()->enrolled_programs->where("program_id",$program->id)->first()->time))<=(new DateTime("NOW")))
+                            <a class="btn btn-success" href="{{$program->link}}">Join Now</a>
+                            @else
+                            <p>Join in: <strong id="timer"></strong></p>
+                            @endif
+                        @else
+                            <a class="btn btn-success" href="{{route("programs.subscribe.slot",$program->id)}}">Enroll Now</a>
+                        @endif
+                         @else
+                         <a class="btn btn-success" href="{{route("login")}}">Login</a>
+                        @endauth
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+@auth
+   @if(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()!==NULL)
+         @if((new DateTime(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()->date." ".Auth::user()->enrolled_programs->where("program_id",$program->id)->first()->time))>(new DateTime("NOW")))
+         <script>
+            var countDownDate = new Date('{{Auth::user()->enrolled_programs->where("program_id",$program->id)->first()->date." ".Auth::user()->enrolled_programs->where("program_id",$program->id)->first()->time}}').getTime();
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+            
+               // Get today's date and time
+               var now = new Date().getTime();
+            
+               // Find the distance between now and the count down date
+               var distance = countDownDate - now;
+            
+               // Time calculations for days, hours, minutes and seconds
+               var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+               var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+               var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+               var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+               // Display the result in the element with id="timer"
+               document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+               + minutes + "m " + seconds + "s ";
+            
+               // If the count down is finished, write some text
+               if (distance < 0) {
+               clearInterval(x);
+               document.getElementById("timer").innerHTML = `<a href="{{$program->link}}">Join Now</a>`;
+               }
+            }, 1000);
+         </script>
+         @endif
+   @endif
+@endauth
 @endsection

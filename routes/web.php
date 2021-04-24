@@ -29,9 +29,11 @@ use App\Http\Controllers\Organiser\EventController as OrganiserEvent;
 
 // Program
 use App\Http\Controllers\Program\MainController as ProgramMain;
+use App\Http\Controllers\Program\EnrollController as ProgramEnroll;
 
 // Event
 use App\Http\Controllers\Event\MainController as EventMain;
+use App\Http\Controllers\Event\EnrollController as EventEnroll;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,11 +145,19 @@ Route::middleware(["auth","verified"])->group(function(){
 Route::name("programs.")->prefix("programs")->group(function() {
     Route::get("/",[ProgramMain::class,"index"])->name("index");
     Route::get("view/{id}/{title}",[ProgramMain::class,"view"])->name("view");
+    Route::middleware(["auth","verified"])->name("subscribe.")->prefix("subscribe")->group(function(){
+        Route::get("/{id}/slot",[ProgramEnroll::class,"chooseSlot"])->name("slot");
+        Route::post("/{id}",[ProgramEnroll::class,"enroll"])->name("add");
+    });
 });
 
 Route::name("events.")->prefix("events")->group(function() {
     Route::get("/",[EventMain::class,"index"])->name("index");
     Route::get("view/{id}/{title}",[EventMain::class,"view"])->name("view");
+    Route::middleware(["auth","verified"])->name("subscribe.")->prefix("subscribe")->group(function(){
+        Route::get("/{id}/slot",[EventEnroll::class,"chooseSlot"])->name("slot");
+        Route::post("/{id}",[EventEnroll::class,"enroll"])->name("add");
+    });
 });
 
 

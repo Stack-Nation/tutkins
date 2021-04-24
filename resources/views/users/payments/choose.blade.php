@@ -1,23 +1,17 @@
 <?php 
-    if($type=="mentoring" and ($date==NULL or $time==NULL)){
+    if($date==NULL or $time==NULL){
         echo "<script>history.back()</script>";
     }
     $image = "";
-    $discount=0;
     $total = $item->price;
-    if($type=="course"){
-        $image = asset("assets/courses/image/".$item->image);
+    if($type=="program"){
+        $image = asset("assets/programs/thumbnail/".$item->thumbnail);
     }
-    else if($type=="webinar"){
-        $image = asset("assets/webinars/thumbnail/".$item->thumbnail);
-        $discount = $total * $item->discount/100;
-        $total = $total - $discount;
-    }
-    else if($type=="mentoring"){
-        $image = asset("assets/mentorings/thumbnail/".$item->thumbnail);
+    else if($type=="event"){
+        $image = asset("assets/events/thumbnail/".$item->thumbnail);
     }
 ?>
-@extends('layouts.authApp')
+@extends('layouts.app')
 @section("title","Checkout")
 @section('content')
 <!-- Content Header (Page header) -->
@@ -62,12 +56,11 @@
                             <th>{{$item->price}} INR</th>
                         </tr>
                         <tr>
-                            <td colspan="3" align="right">Discount</td>
-                            <td>{{$discount}} INR</td>
-                        </tr>
-                        <tr>
                             <th colspan="3" class="text-right font-size-24 font-weight-700">Payable Amount</th>
                             <th class="font-size-24 font-weight-700">{{$total}} INR</th>
+                        </tr>
+                        <tr>
+                            <td colspan="4">Timing: {{\Carbon\Carbon::parse($date)->format("d M Y")}} at {{\Carbon\Carbon::parse($time)->format("h:i:s A")}}</td>
                         </tr>
                     </tbody>
                 </table>
