@@ -35,8 +35,8 @@ class CreateUsersTable extends Migration
             $table->string('aadhar')->nullable();
             $table->json('training')->nullable();
             $table->json('parent_info')->nullable();
-            $table->boolean('is_org')->default(0);
-            $table->boolean('is_trainer')->default(0);
+            $table->boolean('is_org')->default(1);
+            $table->boolean('is_trainer')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });
