@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\UserController as AdminUser;
 use App\Http\Controllers\Admin\ManagerController as AdminManager;
 use App\Http\Controllers\Admin\CategoryController as AdminCategory;
 use App\Http\Controllers\Admin\ApiController as AdminApi;
+use App\Http\Controllers\Admin\ProgramController as AdminProgram;
+use App\Http\Controllers\Admin\EventController as AdminEvent;
 
 // Kid
 use App\Http\Controllers\Kid\DashboardController as KidDashboard;
@@ -102,6 +104,10 @@ Route::middleware(["auth","verified"])->group(function(){
 
         Route::get("apis",[AdminApi::class,"index"])->name("apis");
         Route::post("apis",[AdminApi::class,"update"])->name("apis");
+
+        Route::get("programs",[AdminProgram::class,"index"])->name("programs");
+
+        Route::get("events",[AdminEvent::class,"index"])->name("events");
     });
     Route::middleware(["adminAuth"])->name("manager.")->prefix("manager")->group(function(){
         Route::get("dashboard",[AdminDashboard::class,"index"])->name("dashboard");
@@ -111,6 +117,8 @@ Route::middleware(["auth","verified"])->group(function(){
         Route::get("categories",[AdminCategory::class,"index"])->name("categories");
         Route::post("category/create",[AdminCategory::class,"create"])->name("category.create");
         Route::post("category/delete",[AdminCategory::class,"delete"])->name("category.delete");
+
+        Route::get("programs",[AdminProgram::class,"index"])->name("programs");
     });
     Route::middleware(["kidAuth"])->name("kid.")->prefix("kid")->group(function(){
         Route::get("dashboard",[KidDashboard::class,"index"])->name("dashboard");
