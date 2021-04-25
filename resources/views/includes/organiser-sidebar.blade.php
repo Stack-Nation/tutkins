@@ -15,4 +15,11 @@
         <i class="mdi mdi-clipboard"></i> <span class="nav-text">Events</span>
     </a>
 </li>
+@if(Auth::user()->is_trainer==1)
+<li class="@if(Request::route()->getName()==="trainer.programs") active @endif">
+    <a class="has-arrow" href="{{route("trainer.programs")}}" aria-expanded="false">
+        <i class="mdi mdi-clipboard"></i> <span class="nav-text">Programs</span>
+    </a>
+</li>
+@endif
 @endsection

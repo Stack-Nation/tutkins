@@ -15,4 +15,11 @@
         <i class="mdi mdi-clipboard"></i> <span class="nav-text">Programs</span>
     </a>
 </li>
+@if(Auth::user()->is_org==1)
+<li class="@if(Request::route()->getName()==="organiser.events") active @endif">
+    <a class="has-arrow" href="{{route("organiser.events")}}" aria-expanded="false">
+        <i class="mdi mdi-clipboard"></i> <span class="nav-text">Events</span>
+    </a>
+</li>
+@endif
 @endsection
