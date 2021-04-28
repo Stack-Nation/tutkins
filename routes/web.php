@@ -69,6 +69,8 @@ Route::middleware(["auth","verified"])->group(function(){
         Route::get("settings",[UserSettings::class,"settings"])->name("settings");
         Route::post("settings",[UserSettings::class,"update"])->name("settings");
         Route::get("not-verified",[UserSettings::class,"notVerified"])->name("not-verified");
+        Route::post("training",[UserSettings::class,"training"])->name("training");
+        Route::post("parent",[UserSettings::class,"parent"])->name("parent");
 
         Route::middleware(["approved"])->group(function(){
             Route::get("{type}/{id}/checkout",[UserPayment::class,"choose"])->name("payment.choose");

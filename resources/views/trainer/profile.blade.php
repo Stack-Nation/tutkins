@@ -59,7 +59,75 @@
                 <button class="btn btn-primary">Update</button>
             </div>
         </form>
+
+        <hr>
+        <h3 class="float-left">Training Information</h3><button data-toggle="modal" data-target="#trainingModal" class="btn btn-primary btn-sm ml-4">Add Information</button>
+        @if($user->training===NULL)
+            <p>No data added.</p>
+        @else
+            <div class="row mt-3">
+            @foreach (json_decode($user->training) as $training)
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">{{$training->title}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>{{$training->description}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <a href="{{asset("assets/users/training/document/".$training->document)}}" class="btn btn-success ">View Document</a>
+                            </div>
+                            <div class="col-lg-5 ml-2">
+                                <a href="{{asset("assets/users/training/video/".$training->video)}}" class="btn btn-info ">View Self Video</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            </div>
+        @endif
     </div>
+</div>
+@endsection
+@section('modals')
+<div class="modal fade" id="trainingModal" tabindex="-1" aria-labelledby="trainingLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h3>Add Training Information</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{{route("user.training")}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group mb-2">
+                <input type="text" name="title" placeholder="Title" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <input type="text" name="description" placeholder="Description" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label for="document">Document:</label>
+                <input type="file" name="document" placeholder="Document" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label for="video">Self Video:</label>
+                <input type="file" name="video" placeholder="Self Video" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Add</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection
 @section('scripts')
