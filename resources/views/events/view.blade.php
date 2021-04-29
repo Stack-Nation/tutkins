@@ -1,3 +1,41 @@
+<?php
+$ratings = 0;
+$ratings5 = 0;
+$ratings4 = 0;
+$ratings3 = 0;
+$ratings2 = 0;
+$ratings1 = 0;
+if($event->feedback === NULL){
+    $ratings = 0;
+}
+else{
+    $totalr = count($event->feedback);
+    foreach ($event->feedback as $r) {
+        $ratings = $ratings + (int)$r->stars;
+        if((int)$r->stars===5){
+            $ratings5++;
+        }
+        elseif((int)$r->stars===4){
+            $ratings4++;
+        }
+        elseif((int)$r->stars===3){
+            $ratings3++;
+        }
+        elseif((int)$r->stars===2){
+            $ratings2++;
+        }
+        elseif((int)$r->stars===1){
+            $ratings1++;
+        }
+    }
+    $ratings = $ratings / $totalr;
+    $ratings5 = (int)(($ratings5 / $totalr)*100);
+    $ratings4 = (int)(($ratings4 / $totalr)*100);
+    $ratings3 = (int)(($ratings3 / $totalr)*100);
+    $ratings2 = (int)(($ratings2 / $totalr)*100);
+    $ratings1 = (int)(($ratings1 / $totalr)*100);
+}
+?>
 @extends('layouts.app')
 @section("title",$event->title)
 @section('content')
@@ -22,6 +60,7 @@
                    <li class="nav-item"><a href="#" data-target="#gallery" data-toggle="tab" class="nav-link text-capitalize">Gallery</a></li>
                    @if($event->mode==="Offline")<li class="nav-item"><a href="#" data-target="#location" data-toggle="tab" class="nav-link text-capitalize">Location</a></li>@endif
                    <li class="nav-item"><a href="#" data-target="#timings" data-toggle="tab" class="nav-link text-capitalize">Timings</a></li>
+                   <li class="nav-item"><a href="#" data-target="#feedbacks" data-toggle="tab" class="nav-link text-capitalize">Feedbacks</a></li>
                 </ul>
                 <div class="tab-content mt-3">
                    <div id="overview" class="tab-pane fade  active show">
@@ -114,6 +153,190 @@
                                     @endforeach
                                     </ul>
                                 </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div id="feedbacks" class="tab-pane fade">
+                       <div class="card">
+                           <div class="card-header">
+                               <h3 class="card-title">Feedbacks</h3>
+                           </div>
+                           <div class="card-body">
+                            <div class="row mb-32pt">
+                                <div class="col-md-3 mb-32pt mb-md-0">
+                                    <div class="display-1">{{$ratings}}</div>
+                                    <div class="rating rating-24">
+                                        <div id="fratings" style="font-size:1rem" data-rating-value="{{$ratings}}"></div>
+                                    </div>
+                                    <p class="text-muted mb-0">{{$event->feedback===NULL ? 0: count($event->feedback)}} ratings</p>
+                                </div>
+                                <div class="col-md-9">
+                    
+                                    <div class="row align-items-center mb-8pt"
+                                         data-toggle="tooltip"
+                                         data-title="{{$ratings5}}% rated 5/5"
+                                         data-placement="top">
+                                        <div class="col-md col-sm-6">
+                                            <div class="progress"
+                                                 style="height: 8px;">
+                                                <div class="progress-bar bg-primary"
+                                                     role="progressbar"
+                                                     aria-valuenow="{{$ratings5}}"
+                                                     style="width: {{$ratings5}}%"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-auto col-sm-6 d-none d-sm-flex align-items-center">
+                                            <div class="rating">
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mb-8pt"
+                                         data-toggle="tooltip"
+                                         data-title="{{$ratings4}}% rated 4/5"
+                                         data-placement="top">
+                                        <div class="col-md col-sm-6">
+                                            <div class="progress"
+                                                 style="height: 8px;">
+                                                <div class="progress-bar bg-primary"
+                                                     role="progressbar"
+                                                     aria-valuenow="{{$ratings4}}"
+                                                     style="width: {{$ratings4}}%"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-auto col-sm-6 d-none d-sm-flex align-items-center">
+                                            <div class="rating">
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mb-8pt"
+                                         data-toggle="tooltip"
+                                         data-title="{{$ratings3}}% rated 3/5"
+                                         data-placement="top">
+                                        <div class="col-md col-sm-6">
+                                            <div class="progress"
+                                                 style="height: 8px;">
+                                                <div class="progress-bar bg-primary"
+                                                     role="progressbar"
+                                                     aria-valuenow="{{$ratings3}}"
+                                                     style="width: {{$ratings3}}%"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-auto col-sm-6 d-none d-sm-flex align-items-center">
+                                            <div class="rating">
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                                <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mb-8pt"
+                                         data-toggle="tooltip"
+                                         data-title="{{$ratings2}}% rated 2/5"
+                                         data-placement="top">
+                                        <div class="col-md col-sm-6">
+                                            <div class="progress"
+                                                 style="height: 8px;">
+                                                <div class="progress-bar bg-primary"
+                                                     role="progressbar"
+                                                     aria-valuenow="{{$ratings2}}"
+                                                     style="width: {{$ratings2}}%"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-auto col-sm-6 d-none d-sm-flex align-items-center">
+                                            <div class="rating">
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                                <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                                <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mb-8pt"
+                                         data-toggle="tooltip"
+                                         data-title="{{$ratings1}}% rated 0/5"
+                                         data-placement="top">
+                                        <div class="col-md col-sm-6">
+                                            <div class="progress"
+                                                 style="height: 8px;">
+                                                <div class="progress-bar bg-primary"
+                                                     role="progressbar"
+                                                     aria-valuenow="{{$ratings1}}"
+                                                     style="width: {{$ratings1}}%"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-auto col-sm-6 d-none d-sm-flex align-items-center">
+                                            <div class="rating">
+                                                <span class="rating__item"><span class="material-icons">star</span></span>
+                                                <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                                <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                                <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                                <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                </div>
+                            </div>
+                            
+                            @if($event->feedback === NULL)
+                                <p>No feedback found.</p>
+                            @else
+                            @foreach($event->feedback as $f)
+                            <?php
+                                $student = \App\Models\User::find($f->user_id)
+                            ?>
+                            <div class="pb-16pt mb-16pt border row shadow-sm p-3">
+                                <div class="col-md-3 mb-16pt mb-md-0">
+                                    <div class="d-flex">
+                                        <a href="student-profile.html"
+                                           class="avatar avatar-sm mr-12pt">
+                                            <!-- <img src="LB" alt="avatar" class="avatar-img rounded-circle"> -->
+                                            <span class="avatar-title rounded-circle">
+                                                <img src="@if($student->photo===NULL) {{asset("assets/users/photo/default.png")}} @else {{asset("assets/users/photo/".$student->photo)}} @endif"
+                                                alt="{{$f->user_id}}"
+                                                class="rounded-circle"
+                                                width="64">
+                                            </span>
+                                        </a>
+                                        <div class="flex">
+                                            <a href="#!"
+                                               class="card-title">{{$student->name}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="rating mb-8pt">
+                                        <div class="uratings" style="font-size:1rem" data-rating-value="{{$f->stars}}"></div>
+                                    </div>
+                                    {!!$f->feedback!!}
+                                </div>
+                            </div>
+                            <br>
+                            @endforeach
+                            @endif
                            </div>
                        </div>
                    </div>

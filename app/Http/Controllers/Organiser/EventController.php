@@ -206,7 +206,7 @@ class EventController extends Controller
             else{
                 unlink("assets/events/thumbnail/".$event->thumbnail);
                 unlink("assets/events/video/".$event->video);
-                // EnrolledEvent::where("event_id",$event->id)->delete();
+                EnrolledEvent::where("event_id",$event->id)->delete();
                 $event->delete();
                 $request->session()->flash('success', "Event successfully deleted");
                 return redirect()->back();

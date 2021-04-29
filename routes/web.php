@@ -167,6 +167,8 @@ Route::name("programs.")->prefix("programs")->group(function() {
     Route::middleware(["auth","verified"])->name("subscribe.")->prefix("subscribe")->group(function(){
         Route::get("/{id}/slot",[ProgramEnroll::class,"chooseSlot"])->name("slot");
         Route::post("/{id}",[ProgramEnroll::class,"enroll"])->name("add");
+        Route::get("/{id}/feedback",[ProgramMain::class,"feedback"])->name("feedback");
+        Route::post("/{id}/feedback",[ProgramMain::class,"addFeedback"])->name("feedback");
     });
 });
 
@@ -176,6 +178,8 @@ Route::name("events.")->prefix("events")->group(function() {
     Route::middleware(["auth","verified"])->name("subscribe.")->prefix("subscribe")->group(function(){
         Route::get("/{id}/slot",[EventEnroll::class,"chooseSlot"])->name("slot");
         Route::post("/{id}",[EventEnroll::class,"enroll"])->name("add");
+        Route::get("/{id}/feedback",[EventMain::class,"feedback"])->name("feedback");
+        Route::post("/{id}/feedback",[EventMain::class,"addFeedback"])->name("feedback");
     });
 });
 

@@ -190,7 +190,7 @@ class ProgramController extends Controller
             else{
                 unlink("assets/programs/thumbnail/".$program->thumbnail);
                 unlink("assets/programs/video/".$program->video);
-                // EnrolledProgram::where("program_id",$program->id)->delete();
+                EnrolledProgram::where("program_id",$program->id)->delete();
                 $program->delete();
                 $request->session()->flash('success', "Program successfully deleted");
                 return redirect()->back();

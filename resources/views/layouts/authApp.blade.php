@@ -14,6 +14,11 @@
 
         <link type="text/css" href="{{asset("assets/toastr/toastr.min.css")}}" rel="stylesheet" />
         <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
+        <!-- Material Design Icons -->
+        <link type="text/css" href="{{asset("assets/main/css/material-icons.css")}}" rel="stylesheet">
+
+        <!-- Font Awesome Icons -->
+        <link type="text/css" href="{{asset("assets/main/css/fontawesome.css")}}" rel="stylesheet">
 
         <style>  
             .ck-editor__editable {height: 150px;}

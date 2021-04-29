@@ -30,6 +30,7 @@
                                 <td>{{$program->program->duration}}</td>
                                 <td>{{$program->program->classes}}</td>
                                 <td>{{\Carbon\Carbon::parse($program->date)->format("d M Y")}} at {{\Carbon\Carbon::parse($program->time)->format("h:i:s A")}}</td>
+                                <td><a href="{{route("programs.subscribe.feedback",$program->program->id)}}" class="btn btn-warning btn-sm">Feedback</a></td>
                                 @if($program->program->mode=="Online")<td><a href="{{$program->program->link}}" class="btn btn-info btn-sm">Join Now</a></td>@endif
                             </tr>
                         @endforeach
