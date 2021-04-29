@@ -90,7 +90,7 @@ else{
                             <div class="media">
                                 <img src="@if($program->trainer->photo===NULL) {{asset("assets/users/photo/default.png")}} @else {{asset("assets/users/photo/".$program->trainer->photo)}} @endif" alt="Author_Image" width="100px" class="img-fluid rounded">
                                 <div class="media-body ml-4">
-                                    <h2 class="text-capitalize">{{$program->trainer->name}}</h2>
+                                    <h2 class="text-capitalize"><a href="{{route("trainer.view-profile",$program->trainer->id)}}">{{$program->trainer->name}}</a></h2>
                                     <p class="text-dark">
                                         {!!$program->trainer->description!!}
                                     </p>

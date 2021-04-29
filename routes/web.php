@@ -89,6 +89,9 @@ Route::middleware(["auth","verified"])->group(function(){
             Route::post("messagesA",[UserMessage::class,"messagesA"])->name("messagesA");
         });
     });
+    Route::get("kid/view-profile/{id}",[KidProfile::class,"view"])->name("kid.view-profile");
+    Route::get("trainer/view-profile/{id}",[TrainerProfile::class,"view"])->name("trainer.view-profile");
+    Route::get("organiser/view-profile/{id}",[TrainerProfile::class,"view"])->name("organiser.view-profile");
     Route::middleware(["adminAuth"])->name("admin.")->prefix("admin")->group(function(){
         Route::get("dashboard",[AdminDashboard::class,"index"])->name("dashboard");
         Route::get("users/{type?}",[AdminUser::class,"index"])->name("users");

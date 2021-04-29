@@ -90,7 +90,7 @@ else{
                             <div class="media">
                                 <img src="@if($event->organiser->photo===NULL) {{asset("assets/users/photo/default.png")}} @else {{asset("assets/users/photo/".$event->organiser->photo)}} @endif" alt="Author_Image" width="100px" class="img-fluid rounded">
                                 <div class="media-body ml-4">
-                                    <h2 class="text-capitalize">{{$event->organiser->name}}</h2>
+                                    <h2 class="text-capitalize"><a href="{{route("organiser.view-profile",$event->organiser->id)}}">{{$event->organiser->name}}</a></h2>
                                     <p class="text-dark">
                                         {!!$event->organiser->description!!}
                                     </p>

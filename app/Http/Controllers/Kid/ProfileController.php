@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Kid;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -72,5 +73,11 @@ class ProfileController extends Controller
         $user->save();
         $request->session()->flash('success', "Profile successfully updated");
         return redirect()->back();
+    }
+    public function view($id){
+        $user = User::find($id);
+        return view("kid.view-profile")->with([
+            "user"=>$user
+        ]);
     }
 }
