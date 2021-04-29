@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Organiser;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\EnrolledEvent;
 use App\Models\Category;
 use Auth;
 use Illuminate\Support\Facades\Mail;
@@ -24,6 +25,23 @@ class EventController extends Controller
         return view("organiser.event.create")->with([
             "categories" => $categories
         ]);
+    }
+    public function subscribers($id){
+        $event = Event::find($id);
+        if($event===NULL){
+            abort(404);
+        }
+        else{
+            if($event->organiser_id!==Auth::user()->id){
+                abort(404);
+            }
+            else{
+                $subscribers = EnrolledEvent::where("event_id",$event->id)->latest()->paginate(15);
+                return view("organiser.event.subscribers")->with([
+                    "subscribers" => $subscribers,
+                ]);
+            }
+        }
     }
     public function store(Request $request){
         $this->validate($request,[

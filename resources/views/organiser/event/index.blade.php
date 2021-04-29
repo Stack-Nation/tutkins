@@ -21,6 +21,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,6 +33,9 @@
                                 <td>{{$event->duration}}</td>
                                 <td>{{$event->days}}</td>
                                 @if($event->mode=="Online")<td><a href="{{$event->link}}" class="btn btn-info btn-sm">Join Now</a></td>@endif
+                                <td>
+                                    <a href="{{route("organiser.events.subscribers",$event->id)}}" class="btn btn-success btn-sm">Manage Subscribers</a>
+                                </td>
                                 <td>
                                     <a href="{{route("organiser.events.edit",$event->id)}}" class="btn btn-success btn-sm">Edit</a>
                                 </td>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Trainer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Program;
+use App\Models\EnrolledProgram;
 use App\Models\Category;
 use Auth;
 use Illuminate\Support\Facades\Mail;
@@ -106,6 +107,23 @@ class ProgramController extends Controller
         $notification->save();
         $request->session()->flash('success', "Program created.");
         return redirect()->back();
+    }
+    public function subscribers($id){
+        $program = Program::find($id);
+        if($program===NULL){
+            abort(404);
+        }
+        else{
+            if($program->trainer_id!==Auth::user()->id){
+                abort(404);
+            }
+            else{
+                $subscribers = EnrolledProgram::where("program_id",$program->id)->latest()->paginate(15);
+                return view("trainer.program.subscribers")->with([
+                    "subscribers" => $subscribers,
+                ]);
+            }
+        }
     }
     public function edit($id){
         $program = Program::find($id);

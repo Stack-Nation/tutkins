@@ -138,6 +138,7 @@ Route::middleware(["auth","verified"])->group(function(){
             Route::get("dashboard",[TrainerDashboard::class,"index"])->name("dashboard");
 
             Route::get("programs",[TrainerProgram::class,"index"])->name("programs");
+            Route::get("programs/subscribers/{id}",[TrainerProgram::class,"subscribers"])->name("programs.subscribers");
             Route::get("programs/create",[TrainerProgram::class,"create"])->name("programs.create");
             Route::post("programs/create",[TrainerProgram::class,"store"])->name("programs.create");
             Route::get("programs/edit/{id}",[TrainerProgram::class,"edit"])->name("programs.edit");
@@ -152,6 +153,7 @@ Route::middleware(["auth","verified"])->group(function(){
             Route::get("dashboard",[OrganiserDashboard::class,"index"])->name("dashboard");
 
             Route::get("events",[OrganiserEvent::class,"index"])->name("events");
+            Route::get("events/subscribers/{id}",[OrganiserEvent::class,"subscribers"])->name("events.subscribers");
             Route::get("events/create",[OrganiserEvent::class,"create"])->name("events.create");
             Route::post("events/create",[OrganiserEvent::class,"store"])->name("events.create");
             Route::get("events/edit/{id}",[OrganiserEvent::class,"edit"])->name("events.edit");
