@@ -1,5 +1,12 @@
 @extends('layouts.authApp')
 @section("title","Organiser Profile")
+@section("head")
+<style>
+    #map{
+        height: 300px;
+    }
+</style>
+@endsection
 @section('content')
 <div class="row">
     <div class="col-12">
@@ -45,7 +52,11 @@
             </div>
             <div class="form-group">
                 <label class="form-label" for="address">Address:</label>
-                <input id="address" value="{{$user->address}}" type="text" class="form-control" name="address">
+                <input value="{{$user->address}}" onkeyup="findAdd(this.value);" type="text" class="form-control">
+                <input id="address" value="{{$user->address}}" hidden type="text" name="address">
+            </div>
+            <div class="form-group">
+                <div id="map"></div>
             </div>
             <div class="form-group">
                 <label class="form-label" for="pin_code">Pin Code:</label>
@@ -139,4 +150,78 @@ ClassicEditor
         console.error( error );
     });
 </script>
+<script async src="https://maps.googleapis.com/maps/api/js?key={{env("GOOGLE_MAPS_API")}}&callback=initMap&libraries=places"></script>
+<script>
+    let map;
+    let service;
+    let infowindow;
+    
+    function initMap() {
+      const sydney = new google.maps.LatLng(-33.867, 151.195);
+      infowindow = new google.maps.InfoWindow();
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: sydney,
+            zoom: 15,
+        });
+    }
+    
+    async function findAdd (query){
+      const request = {
+        query: query,
+        fields: ["name", "geometry"],
+      };
+      service = new google.maps.places.PlacesService(map);
+      service.findPlaceFromQuery(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+          for (let i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+          map.setCenter(results[0].geometry.location);
+          const pos = {
+              "lat":results[0].geometry.location.lat(),
+              "lng":results[0].geometry.location.lng(),
+          }
+            const geocoder = new google.maps.Geocoder();
+            geocodeLatLng(geocoder, map, infowindow,pos);
+        }
+      });
+    }
+
+    function geocodeLatLng(geocoder, map, infowindow,pos) {
+        const latlng = {
+            lat: parseFloat(pos.lat),
+            lng: parseFloat(pos.lng),
+        };
+        geocoder.geocode({ location: latlng }, (results, status) => {
+            if (status === "OK") {
+            if (results[0]) {
+                map.setZoom(11);
+                const marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                });
+                infowindow.setContent(results[0].formatted_address);
+                infowindow.open(map, marker);
+                $("#address").val(results[0].formatted_address)
+            } else {
+                window.alert("No results found");
+            }
+            } else {
+            window.alert("Geocoder failed due to: " + status);
+            }
+        });
+    }
+    
+    function createMarker(place) {
+      if (!place.geometry || !place.geometry.location) return;
+      const marker = new google.maps.Marker({
+        map,
+        position: place.geometry.location,
+      });
+      google.maps.event.addListener(marker, "click", () => {
+        infowindow.setContent(place.name || "");
+        infowindow.open(map);
+      });
+    }
+    </script>
 @endsection
