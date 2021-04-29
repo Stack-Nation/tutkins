@@ -63,6 +63,7 @@ class EventController extends Controller
             "times"=>"required",
             "price"=>"required",
             "duration"=>"required",
+            "durationt"=>"required",
             "video"=>"required",
         ]);
         $event = new Event;
@@ -82,7 +83,7 @@ class EventController extends Controller
         $event->dates = json_encode($request->dates);
         $event->times = json_encode($request->times);
         $event->price = $request->price;
-        $event->duration = $request->duration;
+        $event->duration = $request->duration." ".$request->durationt;
         if($request->hasFile("thumbnail")){
             $tpath = "assets/events/thumbnail/";
             $name = $_FILES["thumbnail"]["name"];

@@ -48,9 +48,17 @@
                             <label for="link">Program link</label>
                             <input type="text" name="link" id="link" class="form-control form-control-sm">
                         </div>
-                        <div class="col-12 form-group mb-2">
-                            <label for="duration">Program duration</label>
-                            <input type="text" name="duration" id="duration" class="form-control form-control-sm">
+                        <div class="col-12 input-group mb-2">
+                            <input type="text" name="duration" id="duration" placeholder="Program Duration" class="form-control form-control-sm">
+                            <div class="input-group-append">
+                                <select name="durationt" id="durationt" class="form-control form-control-sm">
+                                    <option value="day">day</option>
+                                    <option value="hour">hour</option>
+                                    <option value="week">week</option>
+                                    <option value="month">month</option>
+                                    <option value="year">year</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-12 form-group mb-2">
                             <label for="classes">Number of classes</label>
@@ -65,18 +73,32 @@
                             <input type="number" name="trial_price" id="trial_price" class="form-control form-control-sm">
                         </div>
                         <div class="col-6 form-group mb-2">
-                            <label for="dates">Program Dates</label>
+                            <label for="dates">Program Start Date</label>
                             <div id="dates">
-                                <input type="date" class="form-control form-control-sm mb-2" name="dates[]" min="{{(new DateTime("NOW"))->format("Y-m-d")}}">
+                                <input type="date" class="form-control form-control-sm mb-2" name="sdate" min="{{(new DateTime("NOW"))->format("Y-m-d")}}">
                             </div>
-                            <button class="btn btn-light btn-sm" type="button" onclick="addDate()">Add more dates</button>
+                        </div>
+                        <div class="col-6 form-group mb-2">
+                            <label for="dates">Program End Date</label>
+                            <div id="dates">
+                                <input type="date" class="form-control form-control-sm mb-2" name="edate" min="{{(new DateTime("NOW"))->format("Y-m-d")}}">
+                            </div>
                         </div>
                         <div class="col-lg-6 col-md-12 form-group mb-2">
-                            <label for="times">Program Times</label>
+                            <label for="times">Program Start Time</label>
                             <div id="times">
-                                <input type="time" class="form-control form-control-sm mb-2" name="times[]">
+                                <input type="time" class="form-control form-control-sm mb-2" name="stime">
                             </div>
-                            <button class="btn btn-light btn-sm" type="button" onclick="addTime()">Add more times</button>
+                        </div>
+                        <div class="col-lg-6 col-md-12 form-group mb-2">
+                            <label for="times">Program End Time</label>
+                            <div id="times">
+                                <input type="time" class="form-control form-control-sm mb-2" name="etime">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 form-group mb-2">
+                            <label for="times">Program Interval</label>
+                            <input type="number" class="form-control form-control-sm mb-2" name="interval">
                         </div>
                         <div class="col-12 form-group mb-2">
                             <label class="form-label" for="images[]">Images:</label>
@@ -121,14 +143,6 @@ ClassicEditor
         else{
             $("#linkD").css("display","none");
         }
-    }
-    function addDate(){
-        const time = `<input type="date" class="form-control mb-2" name="dates[]" min="{{(new DateTime("NOW"))->format("Y-m-d")}}">`;
-        $("#dates").append(time);
-    }
-    function addTime(){
-        const time = `<input type="time" class="form-control mb-2" name="times[]">`;
-        $("#times").append(time);
     }
 
     function checkImages(e){

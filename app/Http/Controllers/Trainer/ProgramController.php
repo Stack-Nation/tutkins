@@ -37,11 +37,15 @@ class ProgramController extends Controller
             "link"=>"nullable",
             "thumbnail"=>"required|image",
             "images"=>"required",
-            "dates"=>"required",
-            "times"=>"required",
+            "sdate"=>"required",
+            "edate"=>"required",
+            "stime"=>"required",
+            "etime"=>"required",
             "price"=>"required",
             "trial_price"=>"required",
             "duration"=>"required",
+            "durationt"=>"required",
+            "interval"=>"required",
             "video"=>"required",
         ]);
         $program = new Program;
@@ -53,11 +57,23 @@ class ProgramController extends Controller
         $program->link = $request->link;
         $program->category_id = $request->category;
         $program->trainer_id = Auth::user()->id;
-        $program->dates = json_encode($request->dates);
-        $program->times = json_encode($request->times);
+        $dates = [];
+        $sdate = $request->sdate;
+        $dates[] = $sdate;
+        while (strtotime($sdate) < strtotime($request->edate)) {
+            $sdate =  date ("Y-m-d", strtotime("+1 days", strtotime($sdate)));
+            $dates[] = $sdate;
+        }
+        $program->dates = json_encode($dates);
+        $times = [];
+        for( $i=strtotime($request->stime); $i<strtotime($request->etime); $i+=3600*$request->interval) {
+            $stime = \Carbon\Carbon::parse($i)->format("H:i:s");
+            $times[] = $stime;
+        }
+        $program->times = json_encode($times);
         $program->price = $request->price;
         $program->trial_price = $request->trial_price;
-        $program->duration = $request->duration;
+        $program->duration = $request->duration." ".$request->durationt;
         if($request->hasFile("thumbnail")){
             $tpath = "assets/programs/thumbnail/";
             $name = $_FILES["thumbnail"]["name"];
