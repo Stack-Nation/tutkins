@@ -160,6 +160,36 @@ ClassicEditor
             center: sydney,
             zoom: 15,
         });
+        
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                const pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+                var marker = new google.maps.Marker({
+                    position: pos,
+                    map: map,
+                });
+                const geocoder = new google.maps.Geocoder();
+                geocodeLatLng(geocoder, map, infowindow,pos);
+                google.maps.event.addListener(marker,'click', (function(marker,infowindow){ 
+                    return function() {
+                        infowindow.setContent("You are here");
+                        infowindow.open(map, marker);
+                    };
+                })(marker,infowindow));
+                map.setCenter(pos);
+                },
+                () => {
+                handleLocationError(true, infoWindow, map.getCenter());
+                }
+            );
+        } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+        }
     }
     
     async function findAdd (query){

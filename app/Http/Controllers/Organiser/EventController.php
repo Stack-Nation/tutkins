@@ -22,8 +22,10 @@ class EventController extends Controller
     }
     public function create(){
         $categories = Category::latest()->get();
+        $user = Auth::user();
         return view("organiser.event.create")->with([
-            "categories" => $categories
+            "categories" => $categories,
+            "user" => $user
         ]);
     }
     public function subscribers($id){
