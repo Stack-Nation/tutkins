@@ -20,7 +20,7 @@
                  @csrf
                  <div class="form-group mb-3">
                      <label for="date">Select a date slot</label>
-                     <input type="date" list="dates" onchange="document.getElementById('time').style.display='block'" name="date" class="form-control">
+                     <input type="date" list="dates" onchange="document.getElementById('time').style.display='block'" name="date[]" class="form-control" multiple>
                      <datalist id="dates">
                         @foreach(json_decode($program->dates) as $date)
                         <option value="{{$date}}">{{$date}}</option>

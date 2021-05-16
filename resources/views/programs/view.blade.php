@@ -368,11 +368,7 @@ else{
                         </ul>
                         @auth
                         @if(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()!==NULL)
-                            @if((new DateTime(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()->date." ".Auth::user()->enrolled_programs->where("program_id",$program->id)->first()->time))<=(new DateTime("NOW")))
                             <a class="btn btn-success" href="{{$program->link}}">Join Now</a>
-                            @else
-                            <p>Join in: <strong id="timer"></strong></p>
-                            @endif
                         @else
                             <a class="btn btn-success" href="{{route("programs.subscribe.slot",$program->id)}}">Enroll Now</a>
                         @endif
@@ -386,7 +382,7 @@ else{
     </div>
 @endsection
 @section('scripts')
-@auth
+{{-- @auth
    @if(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()!==NULL)
          @if((new DateTime(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()->date." ".Auth::user()->enrolled_programs->where("program_id",$program->id)->first()->time))>(new DateTime("NOW")))
          <script>
@@ -419,7 +415,7 @@ else{
          </script>
          @endif
    @endif
-@endauth
+@endauth --}}
 <script src="{{asset("assets/rating/rating.js")}}"></script>
 <script>
     window.onload = () => { 

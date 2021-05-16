@@ -63,7 +63,7 @@
                             <th class="font-size-24 font-weight-700">{{$total}} INR</th>
                         </tr>
                         <tr>
-                            <td colspan="4">Timing: {{\Carbon\Carbon::parse($date)->format("d M Y")}} at {{\Carbon\Carbon::parse($time)->format("h:i:s A")}}</td>
+                            <td colspan="4">Timing: {{$date}} {{$time}}</td>
                         </tr>
                     </tbody>
                 </table>
