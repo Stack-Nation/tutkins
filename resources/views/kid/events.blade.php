@@ -16,7 +16,7 @@
                             <th>Category</th>
                             <th>Mode</th>
                             <th>Duration</th>
-                            <th>Number of days</th>
+                            <th>Organiser Name</th>
                             <th>Slot</th>
                             <th></th>
                         </tr>
@@ -28,7 +28,7 @@
                                 <td>{{$event->event->category->name}}</td>
                                 <td>{{$event->event->mode}}</td>
                                 <td>{{$event->event->duration}}</td>
-                                <td>{{$event->event->days}}</td>
+                                <td>{{$event->event->organiser->name}}</td>
                                 <td>{{\Carbon\Carbon::parse($event->date)->format("d M Y")}} at {{\Carbon\Carbon::parse($event->time)->format("h:i:s A")}}</td>
                                 <td><a href="{{route("events.subscribe.feedback",$event->event->id)}}" class="btn btn-warning btn-sm">Feedback</a></td>
                                 @if($event->event->mode=="Online")@if((new DateTime(Auth::user()->enrolled_events->where("event_id",$event->event->id)->first()->date." ".Auth::user()->enrolled_events->where("event_id",$event->event->id)->first()->time))<=(new DateTime("NOW"))->modify('+15 minutes'))<td><a href="{{$event->event->link}}" class="btn btn-info btn-sm">Join Now</a></td>@endif @endif
