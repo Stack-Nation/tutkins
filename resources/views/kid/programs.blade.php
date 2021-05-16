@@ -17,6 +17,7 @@
                             <th>Mode</th>
                             <th>Duration</th>
                             <th>Trainer's Name</th>
+                            <th>Type</th>
                             <th>Slot</th>
                             <th></th>
                         </tr>
@@ -29,6 +30,7 @@
                                 <td>{{$program->program->mode}}</td>
                                 <td>{{$program->program->duration}}</td>
                                 <td>{{$program->program->trainer->name}}</td>
+                                <td>{{$program->type}}</td>
                                 <td>{{\Carbon\Carbon::parse($program->date)->format("d M Y")}} at {{\Carbon\Carbon::parse($program->time)->format("h:i:s A")}}</td>
                                 <td><a href="{{route("programs.subscribe.feedback",$program->program->id)}}" class="btn btn-warning btn-sm">Feedback</a></td>
                                 @if($program->program->mode=="Online")@if((new DateTime(Auth::user()->enrolled_programs->where("program_id",$program->program->id)->first()->date." ".Auth::user()->enrolled_programs->where("program_id",$program->program->id)->first()->time))<=(new DateTime("NOW"))->modify('+15 minutes'))<td><a href="{{$program->program->link}}" class="btn btn-info btn-sm">Join Now</a></td>@endif @endif
