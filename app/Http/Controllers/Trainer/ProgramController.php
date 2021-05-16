@@ -35,6 +35,11 @@ class ProgramController extends Controller
             "mode"=>"required",
             "classes"=>"required",
             "link"=>"nullable",
+            "country" => "nullable",
+            "state" => "nullable",
+            "city" => "nullable",
+            "address" => "nullable",
+            "pin_code" => "nullable",
             "thumbnail"=>"required|image",
             "images"=>"required",
             "sdate"=>"required",
@@ -55,6 +60,11 @@ class ProgramController extends Controller
         $program->mode = $request->mode;
         $program->classes = $request->classes;
         $program->link = $request->link;
+        $program->country = $request->country;
+        $program->state = $request->state;
+        $program->city = $request->city;
+        $program->address = $request->address;
+        $program->pin_code = $request->pin_code;
         $program->category_id = $request->category;
         $program->trainer_id = Auth::user()->id;
         $dates = [];

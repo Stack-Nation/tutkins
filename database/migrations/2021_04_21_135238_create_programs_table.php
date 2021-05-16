@@ -23,6 +23,11 @@ class CreateProgramsTable extends Migration
             $table->string('mode');
             $table->string('thumbnail');
             $table->string('link')->nullable();
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->mediumText('address')->nullable();
+            $table->string('pin_code')->nullable();
             $table->string('duration');
             $table->integer('classes');
             $table->double('price', 15, 8);

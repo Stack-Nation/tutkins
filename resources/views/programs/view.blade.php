@@ -122,11 +122,11 @@ else{
                                <h3 class="card-title">Location</h3>
                            </div>
                            <div class="card-body">
-                               <p class="text-dark">Country: {{$program->trainer->country??"Not Set"}}</p>
-                               <p class="text-dark">State: {{$program->trainer->state??"Not Set"}}</p>
-                               <p class="text-dark">City: {{$program->trainer->city??"Not Set"}}</p>
-                               <p class="text-dark">Address: {{$program->trainer->address??"Not Set"}}</p>
-                               <p class="text-dark">Pin Code: {{$program->trainer->pin_code??"Not Set"}}</p>
+                               <p class="text-dark">Country: {{$program->country??($program->trainer->country??"Not Set")}}</p>
+                               <p class="text-dark">State: {{$program->state??($program->trainer->state??"Not Set")}}</p>
+                               <p class="text-dark">City: {{$program->city??($program->trainer->city??"Not Set")}}</p>
+                               <p class="text-dark">Address: {{$program->address??($program->trainer->address??"Not Set")}}</p>
+                               <p class="text-dark">Pin Code: {{$program->pin_code??($program->trainer->pin_code??"Not Set")}}</p>
                            </div>
                        </div>
                    </div>

@@ -48,6 +48,29 @@
                             <label for="link">Program link</label>
                             <input type="text" name="link" id="link" class="form-control form-control-sm">
                         </div>
+                        <div id="addD" class="row" style="display:none">
+                            <div class="col-12 form-group mb-2">
+                                <label class="form-label" for="country">Country:</label>
+                                <input id="country" type="text" class="form-control form-control-sm" name="country">
+                            </div>
+                            <div class="col-12 form-group mb-2">
+                                <label class="form-label" for="state">State:</label>
+                                <input id="state" type="text" class="form-control form-control-sm" name="state">
+                            </div>
+                            <div class="col-12 form-group mb-2">
+                                <label class="form-label" for="city">City:</label>
+                                <input id="city" type="text" class="form-control form-control-sm" name="city">
+                            </div>
+                            <div class="col-12 form-group mb-2">
+                                <label class="form-label" for="address">Address:</label>
+                                <input onkeyup="findAdd(this.value);" type="text" class="form-control">
+                                <input id="address" hidden type="text" name="address">
+                            </div>
+                            <div class="col-12 form-group mb-2">
+                                <label class="form-label" for="pin_code">Pin Code:</label>
+                                <input id="pin_code" type="text" class="form-control form-control-sm" name="pin_code" >
+                            </div>
+                        </div>
                         <div class="col-12 input-group mb-2">
                             <input type="text" name="duration" id="duration" placeholder="Program Duration" class="form-control form-control-sm">
                             <div class="input-group-append">
@@ -143,6 +166,12 @@ ClassicEditor
         else{
             $("#linkD").css("display","none");
         }
+        if($(obj).val()=="Trainer's Location"){
+            $("#addD").css("display","flex");
+        }
+        else{
+            $("#addD").css("display","none");
+        }
     }
 
     function checkImages(e){
@@ -159,4 +188,78 @@ ClassicEditor
 </script>
 <script src="{{asset("assets/main/assets/plugins/select2/js/select2.full.min.js")}}"></script>
 <script src="{{asset("assets/main/js/plugins-init/select2-init.js")}}"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key={{env("GOOGLE_MAPS_API")}}&callback=initMap&libraries=places"></script>
+<script>
+    let map;
+    let service;
+    let infowindow;
+    
+    function initMap() {
+      const sydney = new google.maps.LatLng(-33.867, 151.195);
+      infowindow = new google.maps.InfoWindow();
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: sydney,
+            zoom: 15,
+        });
+    }
+    
+    async function findAdd (query){
+      const request = {
+        query: query,
+        fields: ["name", "geometry"],
+      };
+      service = new google.maps.places.PlacesService(map);
+      service.findPlaceFromQuery(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+          for (let i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+          map.setCenter(results[0].geometry.location);
+          const pos = {
+              "lat":results[0].geometry.location.lat(),
+              "lng":results[0].geometry.location.lng(),
+          }
+            const geocoder = new google.maps.Geocoder();
+            geocodeLatLng(geocoder, map, infowindow,pos);
+        }
+      });
+    }
+
+    function geocodeLatLng(geocoder, map, infowindow,pos) {
+        const latlng = {
+            lat: parseFloat(pos.lat),
+            lng: parseFloat(pos.lng),
+        };
+        geocoder.geocode({ location: latlng }, (results, status) => {
+            if (status === "OK") {
+            if (results[0]) {
+                map.setZoom(11);
+                const marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                });
+                infowindow.setContent(results[0].formatted_address);
+                infowindow.open(map, marker);
+                $("#address").val(results[0].formatted_address)
+            } else {
+                window.alert("No results found");
+            }
+            } else {
+            window.alert("Geocoder failed due to: " + status);
+            }
+        });
+    }
+    
+    function createMarker(place) {
+      if (!place.geometry || !place.geometry.location) return;
+      const marker = new google.maps.Marker({
+        map,
+        position: place.geometry.location,
+      });
+      google.maps.event.addListener(marker, "click", () => {
+        infowindow.setContent(place.name || "");
+        infowindow.open(map);
+      });
+    }
+    </script>
 @endsection
