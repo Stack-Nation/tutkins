@@ -33,6 +33,8 @@ class CreateUsersTable extends Migration
             $table->mediumText('address')->nullable();
             $table->string('pin_code')->nullable();
             $table->string('aadhar')->nullable();
+            $table->string('occupation')->nullable();
+            $table->string('proficiency')->nullable();
             $table->json('training')->nullable();
             $table->json('parent_info')->nullable();
             $table->boolean('is_org')->default(1);

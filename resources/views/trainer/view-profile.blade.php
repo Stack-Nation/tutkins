@@ -47,8 +47,12 @@
                 <input id="pin_code" value="{{$user->pin_code}}" type="text" class="form-control" name="pin_code" >
             </div>
             <div class="form-group">
-                <label class="form-label" for="aadhar">Aadhar number:</label>
-                <input id="aadhar" value="{{$user->aadhar}}" type="text" class="form-control" name="aadhar" >
+                <label class="form-label" for="occupation">Occupation:</label>
+                <input id="occupation" value="{{$user->occupation}}" type="text" class="form-control" name="occupation" >
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="proficiency">Proficiency:</label>
+                <input id="proficiency" value="{{$user->proficiency}}" type="text" class="form-control" name="proficiency" >
             </div>
 
         <hr>
