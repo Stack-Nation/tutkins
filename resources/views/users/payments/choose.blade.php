@@ -6,6 +6,9 @@
     $total = $item->price;
     if($type=="program"){
         $image = asset("assets/programs/thumbnail/".$item->thumbnail);
+        if($typee=="Trial"){
+            $total = $item->trial_price;
+        }
     }
     else if($type=="event"){
         $image = asset("assets/events/thumbnail/".$item->thumbnail);
@@ -49,11 +52,11 @@
                             <td><img src="{{$image}}" alt="" width="80"></td>
                             <td>{{$item->title}}</td>
                             <td>1</td>
-                            <td>{{$item->price}} INR</td>
+                            <td>{{$total}} INR</td>
                         </tr>
                         <tr>
                             <th colspan="3" class="text-right">Total</th>
-                            <th>{{$item->price}} INR</th>
+                            <th>{{$total}} INR</th>
                         </tr>
                         <tr>
                             <th colspan="3" class="text-right font-size-24 font-weight-700">Payable Amount</th>

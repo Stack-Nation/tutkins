@@ -32,6 +32,7 @@ class EnrollController extends Controller
         $this->validate($request,[
             "date"=>"required",
             "time"=>"required",
+            "type"=>"required",
         ]);
         $program = Program::find($id);
         if($program===NULL){
@@ -42,13 +43,14 @@ class EnrollController extends Controller
             return redirect()->back();
         }
         else{
-            if($program->price==0){
+            if(($program->trial_price==0 && $request->type=="Trial") || ($program->price==0 and $request->type=="Full")){
                 $item = Program::find($id);
                 $enroll = new EnrolledProgram;
                 $enroll->user_id = Auth::user()->id;
                 $enroll->program_id = $item->id;
                 $enroll->date = $request->date;
                 $enroll->time = $request->time;
+                $enroll->type = $request->type;
                 $enroll->save();
 
                 // Mail
@@ -66,7 +68,7 @@ class EnrollController extends Controller
                 return redirect()->route('programs.view', [$item->id,md5($item->title)]);
             }
             else{
-                return redirect()->route('user.payment.choose', ["program",$id])->with(["date"=>$request->date,"time"=>$request->time]);
+                return redirect()->route('user.payment.choose', ["program",$id])->with(["date"=>$request->date,"time"=>$request->time,"typee"=>$request->type]);
             }
         }
     }

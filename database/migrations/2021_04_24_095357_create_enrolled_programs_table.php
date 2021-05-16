@@ -19,6 +19,7 @@ class CreateEnrolledProgramsTable extends Migration
             $table->bigInteger('program_id');
             $table->date('date');
             $table->time('time');
+            $table->string('type');
             $table->timestamps();
         });
     }

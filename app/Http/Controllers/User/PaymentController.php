@@ -22,9 +22,11 @@ class PaymentController extends Controller
     public function choose($type,$id,Request $request){
         if($type==="program"){
             $item = Program::find($id);
+            $typee = $request->session()->get("type");
         }
         if($type==="event"){
             $item = Event::find($id);
+            $typee="";
         }
         return view("users.payments.choose")->with([
             "type"=>$type,
@@ -32,6 +34,7 @@ class PaymentController extends Controller
             "item"=>$item,
             "date"=>$request->session()->get("date"),
             "time"=>$request->session()->get("time"),
+            "typee"=>$typee,
         ]);
     }
     public function razorpay($type,$id,Request $request){
@@ -95,6 +98,7 @@ class PaymentController extends Controller
                 $enroll->program_id = $item->id;
                 $enroll->date = $request->date;
                 $enroll->time = $request->time;
+                $enroll->type = $request->typee;
                 $enroll->save();
 
                 // Mail

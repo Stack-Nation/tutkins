@@ -38,6 +38,17 @@
                         </datalist>
                     </div>
                  </div>
+                 <div id="type">
+                    <div class="form-group mb-3">
+                        <label for="type">Type</label>
+                        <input type="text" list="types" name="type" class="form-control">
+                        <datalist id="types">
+                            <option value="">Select Type</option>
+                            <option value="Trial">Trial</option>
+                            <option value="Full">Full</option>
+                        </datalist>
+                    </div>
+                 </div>
                  <button type="submit" class="btn btn-primary">Enroll</button>
             </form>
         </div>
