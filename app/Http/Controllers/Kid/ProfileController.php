@@ -53,7 +53,6 @@ class ProfileController extends Controller
         $user->city = $request->city;
         $user->address = $request->address;
         $user->pin_code = $request->pin_code;
-        $user->aadhar = $request->aadhar;
         if($request->hasFile("photo")){
             $path = "assets/users/photo/";
             $name = $_FILES["photo"]["name"];
@@ -67,6 +66,22 @@ class ProfileController extends Controller
             }
             else{
                 $request->session()->flash('error', "There is some error in uploading photo");
+                return redirect()->back();
+            }
+        }
+        if($request->hasFile("aadhar")){
+            $path = "assets/users/aadhar/";
+            $name = $_FILES["aadhar"]["name"];
+            $tmp_name = $_FILES["aadhar"]["tmp_name"];
+            $name = idate("U").$name;
+            if(\move_uploaded_file($tmp_name,$path.$name)){
+                if($user->aadhar!==NULL){
+                    unlink($path.$user->aadhar);
+                }
+                $user->aadhar = $name;
+            }
+            else{
+                $request->session()->flash('error', "There is some error in uploading aadhar");
                 return redirect()->back();
             }
         }

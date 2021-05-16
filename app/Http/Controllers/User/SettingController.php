@@ -95,6 +95,7 @@ class SettingController extends Controller
             "dob" => "required",
             "occupation" => "required",
             "company" => "required",
+            "aadhar" => "required",
         ]);
         $user = Auth::user();
         $parent_info = \json_decode($user->parent_info);
@@ -102,17 +103,30 @@ class SettingController extends Controller
             $request->session()->flash('warning', "No more than 2 entries allowed");
             return redirect()->back();
         }
-        $parent = [
-            "name" => $request->name,
-            "description" => $request->description,
-            "dob" => $request->dob,
-            "occupation" => $request->occupation,
-            "company" => $request->company,
-        ];
-        $parent_info[] = $parent;
-        $user->parent_info = \json_encode($parent_info);
-        $user->save();
-        $request->session()->flash('success', "Infomation saved");
-        return redirect()->back();
+        if($request->hasFile("aadhar")){
+            $path = "assets/users/parent/";
+            $name = $_FILES["aadhar"]["name"];
+            $tmp_name = $_FILES["aadhar"]["tmp_name"];
+            $name = idate("U").$name;
+            if(\move_uploaded_file($tmp_name,$path.$name)){
+                $parent = [
+                    "name" => $request->name,
+                    "description" => $request->description,
+                    "dob" => $request->dob,
+                    "occupation" => $request->occupation,
+                    "company" => $request->company,
+                    "aadhar" => $name,
+                ];
+                $parent_info[] = $parent;
+                $user->parent_info = \json_encode($parent_info);
+                $user->save();
+                $request->session()->flash('success', "Infomation saved");
+                return redirect()->back();
+            }
+            else{
+                $request->session()->flash('error', "There is some error in uploading aadhar");
+                return redirect()->back();
+            }
+        }
     }
 }
