@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section("title",$program->title)
+@section('head')
+<link rel="stylesheet" href="{{asset("assets/main/assets/plugins/select2/css/select2.min.css")}}">
+@endsection
 @section('content')
 <div class="container-fluid">
     <div class="row bg-white p-4">
@@ -20,33 +23,30 @@
                  @csrf
                  <div class="form-group mb-3">
                      <label for="date">Select a date slot</label>
-                     <input type="date" list="dates" onchange="document.getElementById('time').style.display='block'" name="date[]" class="form-control" multiple>
-                     <datalist id="dates">
+                     <select name="date" id="date[]" class="custom-select custom-select-lg dropdown-groups" onchange="document.getElementById('time').style.display='block'" multiple>
                         @foreach(json_decode($program->dates) as $date)
                         <option value="{{$date}}">{{$date}}</option>
                         @endforeach
-                     </datalist>
+                     </select>
                  </div>
                  <div id="time" style="display:none">
                     <div class="form-group mb-3">
                         <label for="time">Select a time slot</label>
-                        <input type="time" list="times" name="time" class="form-control">
-                        <datalist id="times">
-                           @foreach(json_decode($program->times) as $time)
-                           <option value="{{$time}}">{{$time}}</option>
-                           @endforeach
-                        </datalist>
+                        <select name="time" id="time[]" class="custom-select custom-select-lg dropdown-groups" multiple>
+                            @foreach(json_decode($program->times) as $time)
+                            <option value="{{$time}}">{{$time}}</option>
+                            @endforeach
+                        </select>
                     </div>
                  </div>
                  <div id="type">
                     <div class="form-group mb-3">
                         <label for="type">Type</label>
-                        <input type="text" list="types" name="type" class="form-control">
-                        <datalist id="types">
+                        <select name="type" id="type" class="custom-select custom-select-lg dropdown-groups">
                             <option value="">Select Type</option>
                             <option value="Trial">Trial</option>
                             <option value="Full">Full</option>
-                        </datalist>
+                        </select>
                     </div>
                  </div>
                  <button type="submit" class="btn btn-primary">Enroll</button>
@@ -54,4 +54,8 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script src="{{asset("assets/main/assets/plugins/select2/js/select2.full.min.js")}}"></script>
+<script src="{{asset("assets/main/js/plugins-init/select2-init.js")}}"></script>
 @endsection

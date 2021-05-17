@@ -63,14 +63,14 @@
                             <th class="font-size-24 font-weight-700">{{$total}} INR</th>
                         </tr>
                         <tr>
-                            <td colspan="4">Timing: {{$date}} {{$time}}</td>
+                            <td colspan="4">Timing: {{json_encode($date)}} {{json_encode($time)}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <form action="{{route('user.payment.razorpay',[$type,$item->id])}}" method="POST" >
-              <input type="date" name="date" value="{{$date}}" hidden>
-              <input type="time" name="time" value="{{$time}}" hidden>
+              <input type="date" name="date" value="{{json_encode($date)}}" hidden>
+              <input type="time" name="time" value="{{json_encode($time)}}" hidden>
               <script src="https://checkout.razorpay.com/v1/checkout.js"
                       data-key="{{ \App\Models\Api::first()->razorpay_key_id }}"
                       data-amount="{{$total*100}}"

@@ -24,7 +24,7 @@
                                 <td><a href="{{route("kid.view-profile",$subscriber->user->id)}}">{{$subscriber->user->name}}</a></td>
                                 <td>{{$subscriber->user->email}}</td>
                                 <td>{{$subscriber->type}}</td>
-                                <td>{{\Carbon\Carbon::parse($subscriber->date)->format("d M Y")}} at {{\Carbon\Carbon::parse($subscriber->time)->format("h:i:s A")}}</td>
+                                <td>{{$subscriber->date}} {{$subscriber->time}}</td>
                             </tr>
                         @endforeach
                     </tbody>
