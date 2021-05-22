@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('photo')->nullable();
             $table->string('dob')->nullable();
             $table->bigInteger('inst_id')->nullable();
+            $table->double('wallet', 15, 8)->default(0);
             $table->string('country')->nullable();
             $table->string('state')->nullable();
             $table->string('city')->nullable();

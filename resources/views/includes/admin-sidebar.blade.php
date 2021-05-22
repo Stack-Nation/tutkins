@@ -40,4 +40,14 @@
         <i class="mdi mdi-clipboard"></i> <span class="nav-text">Events</span>
     </a>
 </li>
+<li class="@if(Request::route()->getName()==="admin.withdrawals.pending") active @endif">
+    <a class="has-arrow" href="{{route("admin.withdrawals.pending")}}" aria-expanded="false">
+        <i class="mdi mdi-clipboard"></i> <span class="nav-text">Pending Withdrawals</span>
+    </a>
+</li>
+<li class="@if(Request::route()->getName()==="admin.withdrawals.approved") active @endif">
+    <a class="has-arrow" href="{{route("admin.withdrawals.approved")}}" aria-expanded="false">
+        <i class="mdi mdi-clipboard"></i> <span class="nav-text">Approved Withdrawals</span>
+    </a>
+</li>
 @endsection

@@ -57,9 +57,11 @@ class PaymentController extends Controller
         
         if($type==="program"){
             $item = Program::find($id);
+            $owner = $item->trainer;
         }
         if($type==="event"){
             $item = Event::find($id);
+            $owner = $item->organiser;
         }
         if($item===NULL){
             Session()->flash("error","The item does not exist");
@@ -91,6 +93,10 @@ class PaymentController extends Controller
             $transaction->status = "Paid";
             $transaction->payment_gateway = "Razorpay";
             $transaction->save();
+
+            $owner->wallet = $payment['amount']/100;
+            $owner->save();
+
             if($type==="program"){
                 $item = Program::find($id);
                 $enroll = new EnrolledProgram;
@@ -100,6 +106,7 @@ class PaymentController extends Controller
                 $enroll->time = $request->time;
                 $enroll->type = $request->typee;
                 $enroll->save();
+                
 
                 // Mail
                 $user = Auth::user();

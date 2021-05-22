@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\SettingController as UserSettings;
 use App\Http\Controllers\User\PaymentController as UserPayment;
 use App\Http\Controllers\User\MessageController as UserMessage;
+use App\Http\Controllers\User\WalletController as UserWallet;
 
 // Admin
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategory;
 use App\Http\Controllers\Admin\ApiController as AdminApi;
 use App\Http\Controllers\Admin\ProgramController as AdminProgram;
 use App\Http\Controllers\Admin\EventController as AdminEvent;
+use App\Http\Controllers\Admin\WithdrawalController as AdminWithdrawal;
 
 // Kid
 use App\Http\Controllers\Kid\DashboardController as KidDashboard;
@@ -87,6 +89,13 @@ Route::middleware(["auth","verified"])->group(function(){
             Route::get("message/{id}",[UserMessage::class,"message"])->name("message");
             Route::post("message/{id}",[UserMessage::class,"sendM"])->name("message");
             Route::post("messagesA",[UserMessage::class,"messagesA"])->name("messagesA");
+
+            // Wallet
+            Route::get('wallet',[InstructorWallet::class,"index"])->name('wallet');
+            Route::get('wallet/accounts',[InstructorWallet::class,"accounts"])->name('wallet.accounts');
+            Route::post('wallet/withdraw',[InstructorWallet::class,"withdraw"])->name('wallet.withdraw');
+            Route::post('wallet/accounts/bank',[InstructorWallet::class,"addBank"])->name('wallet.addBank');
+            Route::post('wallet/accounts/upi',[InstructorWallet::class,"addUpi"])->name('wallet.addUpi');
         });
     });
     Route::get("kid/view-profile/{id}",[KidProfile::class,"view"])->name("kid.view-profile");
@@ -113,6 +122,12 @@ Route::middleware(["auth","verified"])->group(function(){
         Route::get("programs",[AdminProgram::class,"index"])->name("programs");
 
         Route::get("events",[AdminEvent::class,"index"])->name("events");
+
+        //Withdraw methods
+        Route::get('withdrawals/pending', [AdminWithdrawal::class,"pending"])->name('withdrawals.pending');
+        Route::post('withdrawals/accept', [AdminWithdrawal::class,"accept"])->name('withdrawals.accept');
+        Route::post('withdrawals/reject', [AdminWithdrawal::class,"reject"])->name('withdrawals.reject');
+        Route::get('withdrawals/approved', [AdminWithdrawal::class,"approved"])->name('withdrawals.approved');
     });
     Route::middleware(["adminAuth"])->name("manager.")->prefix("manager")->group(function(){
         Route::get("dashboard",[AdminDashboard::class,"index"])->name("dashboard");

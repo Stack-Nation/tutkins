@@ -15,6 +15,11 @@
         <i class="mdi mdi-clipboard"></i> <span class="nav-text">Programs</span>
     </a>
 </li>
+<li class="@if(Request::route()->getName()==="user.wallet") active @endif">
+    <a class="has-arrow" href="{{route("user.wallet")}}" aria-expanded="false">
+        <i class="mdi mdi-clipboard"></i> <span class="nav-text">Wallet</span>
+    </a>
+</li>
 @if(Auth::user()->is_org==1)
 <li class="@if(Request::route()->getName()==="organiser.events") active @endif">
     <a class="has-arrow" href="{{route("organiser.events")}}" aria-expanded="false">
