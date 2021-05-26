@@ -91,11 +91,11 @@ Route::middleware(["auth","verified"])->group(function(){
             Route::post("messagesA",[UserMessage::class,"messagesA"])->name("messagesA");
 
             // Wallet
-            Route::get('wallet',[InstructorWallet::class,"index"])->name('wallet');
-            Route::get('wallet/accounts',[InstructorWallet::class,"accounts"])->name('wallet.accounts');
-            Route::post('wallet/withdraw',[InstructorWallet::class,"withdraw"])->name('wallet.withdraw');
-            Route::post('wallet/accounts/bank',[InstructorWallet::class,"addBank"])->name('wallet.addBank');
-            Route::post('wallet/accounts/upi',[InstructorWallet::class,"addUpi"])->name('wallet.addUpi');
+            Route::get('wallet',[UserWallet::class,"index"])->name('wallet');
+            Route::get('wallet/accounts',[UserWallet::class,"accounts"])->name('wallet.accounts');
+            Route::post('wallet/withdraw',[UserWallet::class,"withdraw"])->name('wallet.withdraw');
+            Route::post('wallet/accounts/bank',[UserWallet::class,"addBank"])->name('wallet.addBank');
+            Route::post('wallet/accounts/upi',[UserWallet::class,"addUpi"])->name('wallet.addUpi');
         });
     });
     Route::get("kid/view-profile/{id}",[KidProfile::class,"view"])->name("kid.view-profile");
