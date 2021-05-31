@@ -44,8 +44,7 @@ class ProgramController extends Controller
             "pin_code" => "nullable",
             "thumbnail"=>"required|image",
             "images"=>"required",
-            "sdate"=>"required",
-            "edate"=>"required",
+            "days"=>"required",
             "stime"=>"required",
             "etime"=>"required",
             "price"=>"required",
@@ -71,14 +70,7 @@ class ProgramController extends Controller
         $program->pin_code = $request->pin_code;
         $program->category_id = $request->category;
         $program->trainer_id = Auth::user()->id;
-        $dates = [];
-        $sdate = $request->sdate;
-        $dates[] = $sdate;
-        while (strtotime($sdate) < strtotime($request->edate)) {
-            $sdate =  date ("Y-m-d", strtotime("+1 days", strtotime($sdate)));
-            $dates[] = $sdate;
-        }
-        $program->dates = json_encode($dates);
+        $program->days = json_encode($request->days);
         $times = [];
         for( $i=strtotime($request->stime); $i<strtotime($request->etime); $i+=3600*$request->interval) {
             $stime = \Carbon\Carbon::parse($i)->format("H:i:s");

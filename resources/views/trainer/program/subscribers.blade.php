@@ -24,7 +24,7 @@
                                 <td><a href="{{route("kid.view-profile",$subscriber->user->id)}}">{{$subscriber->user->name}}</a></td>
                                 <td>{{$subscriber->user->email}}</td>
                                 <td>{{$subscriber->type}}</td>
-                                <td>{{$subscriber->date}} {{$subscriber->time}}</td>
+                                <td>{{$subscriber->day}} {{$subscriber->time}}</td>
                             </tr>
                         @endforeach
                     </tbody>

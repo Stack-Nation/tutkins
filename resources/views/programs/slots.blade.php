@@ -22,10 +22,10 @@
             <form action="{{route("programs.subscribe.add",$program->id)}}" method="post">
                  @csrf
                  <div class="form-group mb-3">
-                     <label for="date">Select a date slot</label>
-                     <select name="date" id="date[]" class="custom-select custom-select-lg dropdown-groups" onchange="document.getElementById('time').style.display='block'" multiple>
-                        @foreach(json_decode($program->dates) as $date)
-                        <option value="{{$date}}">{{$date}}</option>
+                     <label for="day">Select a day</label>
+                     <select name="day" id="day[]" class="custom-select custom-select-lg dropdown-groups" onchange="document.getElementById('time').style.display='block'" multiple>
+                        @foreach(json_decode($program->days) as $day)
+                        <option value="{{$day}}">{{$day}}</option>
                         @endforeach
                      </select>
                  </div>

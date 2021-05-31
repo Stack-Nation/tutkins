@@ -103,17 +103,12 @@
                             <label for="trial_price">Program trial price</label>
                             <input type="number" name="trial_price" id="trial_price" class="form-control form-control-sm">
                         </div>
-                        <div class="col-6 form-group mb-2">
-                            <label for="dates">Program Start Date</label>
-                            <div id="dates">
-                                <input type="date" class="form-control form-control-sm mb-2" name="sdate" min="{{(new DateTime("NOW"))->format("Y-m-d")}}">
+                        <div class="col-12 form-group mb-2">
+                            <label for="days">Program Days</label>
+                            <div id="days">
+                                <input type="text" class="form-control form-control-sm mb-2" name="days[]">
                             </div>
-                        </div>
-                        <div class="col-6 form-group mb-2">
-                            <label for="dates">Program End Date</label>
-                            <div id="dates">
-                                <input type="date" class="form-control form-control-sm mb-2" name="edate" min="{{(new DateTime("NOW"))->format("Y-m-d")}}">
-                            </div>
+                            <button class="btn btn-info" type="button" onclick="addDays()">Add Day</button>
                         </div>
                         <div class="col-lg-6 col-md-12 form-group mb-2">
                             <label for="times">Program Start Time</label>
@@ -203,6 +198,11 @@ ClassicEditor
     function addLinks(){
         $("#linksD").append(`
             <input type="text" class="form-control mb-3" id="links" name="links[]">
+        `);
+    }
+    function addDays(){
+        $("#days").append(`
+            <input type="text" class="form-control form-control-sm mb-2" name="days[]">
         `);
     }
 </script>

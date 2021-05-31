@@ -31,7 +31,7 @@
                                 <td>{{$program->program->duration}}</td>
                                 <td>{{$program->program->trainer->name}}</td>
                                 <td>{{$program->type}}</td>
-                                <td>{{$program->date}} at {{$program->time)}}</td>
+                                <td>{{$program->day}} at {{$program->time)}}</td>
                                 <td><a href="{{route("programs.subscribe.feedback",$program->program->id)}}" class="btn btn-warning btn-sm">Feedback</a></td>
                                 @if($program->program->mode=="Online")<td><a href="{{$program->program->link}}" class="btn btn-info btn-sm">Join Now</a></td>@endif
                             </tr>

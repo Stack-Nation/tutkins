@@ -17,7 +17,7 @@ class CreateEnrolledProgramsTable extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('program_id');
-            $table->json('date');
+            $table->json('day');
             $table->json('time');
             $table->string('type');
             $table->timestamps();

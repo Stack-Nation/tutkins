@@ -102,7 +102,7 @@ class PaymentController extends Controller
                 $enroll = new EnrolledProgram;
                 $enroll->user_id = Auth::user()->id;
                 $enroll->program_id = $item->id;
-                $enroll->date = $request->date;
+                $enroll->day = $request->date;
                 $enroll->time = $request->time;
                 $enroll->type = $request->typee;
                 $enroll->save();

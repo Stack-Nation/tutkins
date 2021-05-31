@@ -1,16 +1,20 @@
-<?php 
-    if($date==NULL or $time==NULL){
-        echo "<script>history.back()</script>";
-    }
+<?php
     $image = "";
     $total = $item->price;
     if($type=="program"){
+    if($day==NULL or $time==NULL){
+        echo "<script>history.back()</script>";
+    }
+    $date = $day;
         $image = asset("assets/programs/thumbnail/".$item->thumbnail);
         if($typee=="Trial"){
             $total = $item->trial_price;
         }
     }
     else if($type=="event"){
+    if($date==NULL or $time==NULL){
+        echo "<script>history.back()</script>";
+    }
         $image = asset("assets/events/thumbnail/".$item->thumbnail);
     }
 ?>

@@ -23,7 +23,7 @@ class MainController extends Controller
         if($program){
             if(md5($program->title)==$title){
                 $program->images = json_decode($program->images);
-                $program->dates = json_decode($program->dates);
+                $program->days = json_decode($program->days);
                 $program->feedback = json_decode($program->feedback);
                 $program->times = json_decode($program->times);
                 return view("programs.view")->with([

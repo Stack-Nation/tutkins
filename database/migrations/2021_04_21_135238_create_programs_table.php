@@ -35,7 +35,7 @@ class CreateProgramsTable extends Migration
             $table->json('images');
             $table->integer('batch_size');
             $table->string('age_group');
-            $table->json('dates');
+            $table->json('days');
             $table->json('times');
             $table->string('video');
             $table->json('links')->nullable();

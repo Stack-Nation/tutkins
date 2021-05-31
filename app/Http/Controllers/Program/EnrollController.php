@@ -30,7 +30,7 @@ class EnrollController extends Controller
     }
     public function enroll($id,Request $request){
         $this->validate($request,[
-            "date"=>"required",
+            "day"=>"required",
             "time"=>"required",
             "type"=>"required",
         ]);
@@ -48,7 +48,7 @@ class EnrollController extends Controller
                 $enroll = new EnrolledProgram;
                 $enroll->user_id = Auth::user()->id;
                 $enroll->program_id = $item->id;
-                $enroll->date = $request->date;
+                $enroll->day = $request->day;
                 $enroll->time = $request->time;
                 $enroll->type = $request->type;
                 $enroll->save();
@@ -68,7 +68,7 @@ class EnrollController extends Controller
                 return redirect()->route('programs.view', [$item->id,md5($item->title)]);
             }
             else{
-                return redirect()->route('user.payment.choose', ["program",$id])->with(["date"=>$request->date,"time"=>$request->time,"typee"=>$request->type]);
+                return redirect()->route('user.payment.choose', ["program",$id])->with(["day"=>$request->day,"time"=>$request->time,"typee"=>$request->type]);
             }
         }
     }

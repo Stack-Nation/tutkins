@@ -138,10 +138,10 @@ else{
                            </div>
                            <div class="card-body row">
                                <div class="col-lg-6">
-                                   <h4>Dates</h4>
+                                   <h4>Days</h4>
                                    <ul class="list-group">
-                                    @foreach ($program->dates as $dates)
-                                        <li class="list-group-item text-dark">{{\Carbon\Carbon::parse($dates)->format("d M Y")}}</li>
+                                    @foreach ($program->days as $day)
+                                        <li class="list-group-item text-dark">{{$day}}</li>
                                     @endforeach
                                    </ul>
                                </div>
