@@ -30,6 +30,8 @@ class CreateEventsTable extends Migration
             $table->string('pin_code')->nullable();
             $table->string('duration');
             $table->integer('days');
+            $table->integer('batch_size');
+            $table->string('age_group');
             $table->double('price', 15, 8);
             $table->json('images');
             $table->json('dates');

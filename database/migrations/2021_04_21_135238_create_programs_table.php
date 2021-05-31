@@ -33,6 +33,8 @@ class CreateProgramsTable extends Migration
             $table->double('price', 15, 8);
             $table->double('trial_price', 15, 8);
             $table->json('images');
+            $table->integer('batch_size');
+            $table->string('age_group');
             $table->json('dates');
             $table->json('times');
             $table->string('video');

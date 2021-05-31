@@ -34,6 +34,8 @@ class ProgramController extends Controller
             "instructions"=>"required",
             "mode"=>"required",
             "classes"=>"required",
+            "age_group"=>"required",
+            "batch_size"=>"required",
             "link"=>"nullable",
             "country" => "nullable",
             "state" => "nullable",
@@ -59,6 +61,8 @@ class ProgramController extends Controller
         $program->instructions = $request->instructions;
         $program->mode = $request->mode;
         $program->classes = $request->classes;
+        $event->age_group = $request->age_group;
+        $event->batch_size = $request->batch_size;
         $program->link = $request->link;
         $program->country = $request->country;
         $program->state = $request->state;
@@ -177,6 +181,8 @@ class ProgramController extends Controller
             "instructions"=>"required",
             "mode"=>"required",
             "classes"=>"required",
+            "age_group"=>"required",
+            "batch_size"=>"required",
             "link"=>"nullable",
             "price"=>"required",
             "trial_price"=>"required",
@@ -196,6 +202,8 @@ class ProgramController extends Controller
                 $program->instructions = $request->instructions;
                 $program->mode = $request->mode;
                 $program->classes = $request->classes;
+                $event->age_group = $request->age_group;
+                $event->batch_size = $request->batch_size;
                 $program->link = $request->link;
                 $program->category_id = $request->category;
                 $program->price = $request->price;

@@ -53,6 +53,8 @@ class EventController extends Controller
             "instructions"=>"required",
             "mode"=>"required",
             "days"=>"required",
+            "age_group"=>"required",
+            "batch_size"=>"required",
             "link"=>"nullable",
             "country" => "nullable",
             "state" => "nullable",
@@ -74,6 +76,8 @@ class EventController extends Controller
         $event->instructions = $request->instructions;
         $event->mode = $request->mode;
         $event->days = $request->days;
+        $event->age_group = $request->age_group;
+        $event->batch_size = $request->batch_size;
         $event->link = $request->link;
         $event->country = $request->country;
         $event->state = $request->state;
@@ -162,6 +166,8 @@ class EventController extends Controller
             "instructions"=>"required",
             "mode"=>"required",
             "days"=>"required",
+            "age_group"=>"required",
+            "batch_size"=>"required",
             "link"=>"nullable",
             "country" => "nullable",
             "state" => "nullable",
@@ -185,6 +191,8 @@ class EventController extends Controller
                 $event->instructions = $request->instructions;
                 $event->mode = $request->mode;
                 $event->days = $request->days;
+                $event->age_group = $request->age_group;
+                $event->batch_size = $request->batch_size;
                 $event->link = $request->link;
                 $event->country = $request->country;
                 $event->state = $request->state;
