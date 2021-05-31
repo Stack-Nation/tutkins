@@ -184,6 +184,7 @@ Route::middleware(["auth","verified"])->group(function(){
 Route::name("programs.")->prefix("programs")->group(function() {
     Route::get("/",[ProgramMain::class,"index"])->name("index");
     Route::get("view/{id}/{title}",[ProgramMain::class,"view"])->name("view");
+    Route::post("search",[ProgramMain::class,"search"])->name("search");
     Route::middleware(["auth","verified"])->name("subscribe.")->prefix("subscribe")->group(function(){
         Route::get("/{id}/slot",[ProgramEnroll::class,"chooseSlot"])->name("slot");
         Route::post("/{id}",[ProgramEnroll::class,"enroll"])->name("add");
@@ -195,6 +196,7 @@ Route::name("programs.")->prefix("programs")->group(function() {
 Route::name("events.")->prefix("events")->group(function() {
     Route::get("/",[EventMain::class,"index"])->name("index");
     Route::get("view/{id}/{title}",[EventMain::class,"view"])->name("view");
+    Route::post("search",[EventMain::class,"search"])->name("search");
     Route::middleware(["auth","verified"])->name("subscribe.")->prefix("subscribe")->group(function(){
         Route::get("/{id}/slot",[EventEnroll::class,"chooseSlot"])->name("slot");
         Route::post("/{id}",[EventEnroll::class,"enroll"])->name("add");

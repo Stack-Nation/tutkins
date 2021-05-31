@@ -5,14 +5,17 @@ namespace App\Http\Controllers\Event;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Category;
 use Auth;
 
 class MainController extends Controller
 {
     public function index(){
         $events = Event::latest()->paginate(15);
+        $categories = Category::latest()->get();
         return view("events.index")->with([
-            "events" => $events
+            "events" => $events,
+            "categories" => $categories,
         ]);
     }
     public function view($id,$title){
@@ -34,6 +37,29 @@ class MainController extends Controller
         else{
             abort(404);
         }
+    }
+    public function search(Request $request){
+        $this->validate($request,[
+            "city"=>"nullable",
+            "age_group"=>"nullable",
+            "category"=>"nullable",
+        ]);
+        $events = Event::latest();
+        if($request->city!=="" and $request->city!==NULL){
+            $events = $events->where("city","LIKE","%".$request->city."%");
+        }
+        if($request->age_group!=="" and $request->age_group!==NULL){
+            $events = $events->where("age_group","LIKE","%".$request->age_group."%");
+        }
+        if($request->category!=="" and $request->category!==NULL){
+            $events = $events->where("category_id",$request->category);
+        }
+        $events = $events->paginate(15);
+        $categories = Category::latest()->get();
+        return view("events.index")->with([
+            "events" => $events,
+            "categories" => $categories,
+        ]);
     }
     public function feedback($id){
         $event = Event::find($id);

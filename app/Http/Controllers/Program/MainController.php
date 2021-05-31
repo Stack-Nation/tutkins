@@ -5,14 +5,17 @@ namespace App\Http\Controllers\Program;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Program;
+use App\Models\Category;
 use Auth;
 
 class MainController extends Controller
 {
     public function index(){
         $programs = Program::latest()->paginate(15);
+        $categories = Category::latest()->get();
         return view("programs.index")->with([
-            "programs" => $programs
+            "programs" => $programs,
+            "categories" => $categories,
         ]);
     }
     public function view($id,$title){
@@ -34,6 +37,29 @@ class MainController extends Controller
         else{
             abort(404);
         }
+    }
+    public function search(Request $request){
+        $this->validate($request,[
+            "city"=>"nullable",
+            "age_group"=>"nullable",
+            "category"=>"nullable",
+        ]);
+        $programs = Program::latest();
+        if($request->city!=="" and $request->city!==NULL){
+            $programs = $programs->where("city","LIKE","%".$request->city."%");
+        }
+        if($request->age_group!=="" and $request->age_group!==NULL){
+            $programs = $programs->where("age_group","LIKE","%".$request->age_group."%");
+        }
+        if($request->category!=="" and $request->category!==NULL){
+            $programs = $programs->where("category_id",$request->category);
+        }
+        $programs = $programs->paginate(15);
+        $categories = Category::latest()->get();
+        return view("programs.index")->with([
+            "programs" => $programs,
+            "categories" => $categories,
+        ]);
     }
     public function feedback($id){
         $program = Program::find($id);
