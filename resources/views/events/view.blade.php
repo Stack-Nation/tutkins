@@ -358,6 +358,14 @@ else{
                                 <p class="float-right">{{$event->days}}</p>
                             </li>
                             <li class="list-group-item text-dark">
+                                <p class="float-left">Age Group</p>
+                                <p class="float-right">{{$event->age_group}}</p>
+                            </li>
+                            <li class="list-group-item text-dark">
+                                <p class="float-left">Batch Size</p>
+                                <p class="float-right">{{$event->batch_size}}</p>
+                            </li>
+                            <li class="list-group-item text-dark">
                                 <p class="float-left">Price</p>
                                 <p class="float-right">{{$event->price==0?"Free":$event->price." INR"}}</p>
                             </li>

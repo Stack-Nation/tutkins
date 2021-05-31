@@ -58,11 +58,11 @@
                         </div>
                         <div class="col-12 form-group mb-2">
                             <label for="batch_size">Batch Size</label>
-                            <input type="number" name="batch_size" id="batch_size" class="form-control form-control-sm">
+                            <input type="number" name="batch_size" value="{{$program->batch_size}}" id="batch_size" class="form-control form-control-sm">
                         </div>
                         <div class="col-12 form-group mb-2">
                             <label for="age_group">Age Group</label>
-                            <input type="text" name="age_group" id="age_group" class="form-control form-control-sm">
+                            <input type="text" name="age_group" value="{{$program->age_group}}" id="age_group" class="form-control form-control-sm">
                         </div>
                         <div class="col-12 form-group mb-2">
                             <label for="price">Program price</label>

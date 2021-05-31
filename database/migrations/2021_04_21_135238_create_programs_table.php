@@ -38,6 +38,7 @@ class CreateProgramsTable extends Migration
             $table->json('dates');
             $table->json('times');
             $table->string('video');
+            $table->json('links')->nullable();
             $table->json('feedback')->nullable();
             $table->timestamps();
         });

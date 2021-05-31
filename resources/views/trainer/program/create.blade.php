@@ -144,7 +144,14 @@
                             <input id="video" type="file" accept=".mp4,.webp,.3gp,.mvi" class="form-control" name="video">
                         </div>
                         <div class="col-12 form-group mb-2">
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <label class="form-label" for="links">Reference Links:</label>
+                            <div id="linksD">
+                                <input type="text" class="form-control mb-3" id="links" name="links[]">
+                            </div>
+                            <button class="btn btn-info" type="button" onclick="addLinks()">Add more links</button>
+                        </div>
+                        <div class="col-12 form-group mb-2">
+                            <button class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -192,6 +199,11 @@ ClassicEditor
         else{
             return true;
         }
+    }
+    function addLinks(){
+        $("#linksD").append(`
+            <input type="text" class="form-control mb-3" id="links" name="links[]">
+        `);
     }
 </script>
 <script src="{{asset("assets/main/assets/plugins/select2/js/select2.full.min.js")}}"></script>

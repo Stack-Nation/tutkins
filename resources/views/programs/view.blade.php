@@ -358,6 +358,14 @@ else{
                                 <p class="float-right">{{$program->classes}}</p>
                             </li>
                             <li class="list-group-item text-dark">
+                                <p class="float-left">Age Group</p>
+                                <p class="float-right">{{$program->age_group}}</p>
+                            </li>
+                            <li class="list-group-item text-dark">
+                                <p class="float-left">Batch Size</p>
+                                <p class="float-right">{{$program->batch_size}}</p>
+                            </li>
+                            <li class="list-group-item text-dark">
                                 <p class="float-left">Trial Price</p>
                                 <p class="float-right">{{$program->trial_price==0?"Free":$program->trial_price." INR"}}</p>
                             </li>
