@@ -58,6 +58,7 @@ else{
                    <li class="nav-item"><a href="#" data-target="#overview" data-toggle="tab" class="nav-link text-capitalize active">Overview </a></li>
                    <li class="nav-item"><a href="#" data-target="#trainer" data-toggle="tab" class="nav-link text-capitalize">Trainer</a></li>
                    <li class="nav-item"><a href="#" data-target="#gallery" data-toggle="tab" class="nav-link text-capitalize">Gallery</a></li>
+                   @if(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()!==NULL)<li class="nav-item"><a href="#" data-target="#documents" data-toggle="tab" class="nav-link text-capitalize">Documents & References</a></li>@endif
                    @if($program->mode==="Trainer's Location")<li class="nav-item"><a href="#" data-target="#location" data-toggle="tab" class="nav-link text-capitalize">Location</a></li>@endif
                    <li class="nav-item"><a href="#" data-target="#timings" data-toggle="tab" class="nav-link text-capitalize">Timings</a></li>
                    <li class="nav-item"><a href="#" data-target="#feedbacks" data-toggle="tab" class="nav-link text-capitalize">Feedbacks</a></li>
@@ -115,6 +116,29 @@ else{
                            </div>
                        </div>
                    </div>
+                   @if(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()!==NULL)
+                   <div id="documents" class="tab-pane fade">
+                       <div class="card">
+                           <div class="card-header">
+                               <h3 class="card-title">Documents and References</h3>
+                           </div>
+                           <div class="card-body">
+                               <div class="row">
+                                   @foreach ($program->documents as $key => $document)
+                                       <div class="col-lg-12">
+                                           <a href="{{$document}}" class="d-block mb-3">Document {{$key}}</a>
+                                       </div>
+                                   @endforeach
+                                   @foreach ($program->links as $link)
+                                       <div class="col-lg-12">
+                                           <p class="mb-2">{{$link}}</p>
+                                       </div>
+                                   @endforeach
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   @endif
                    @if($program->mode==="Trainer's Location")
                    <div id="location" class="tab-pane fade">
                        <div class="card">
