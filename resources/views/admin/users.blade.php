@@ -33,7 +33,7 @@
 
                   <div class="media-body ml-3">
                     <p>
-                      <a href="#"><strong>{{$user->name}}</strong></a>
+                      <a href="@if($user->role=="Trainer") {{route("trainer.view-profile",$user->id)}} @elseif($user->role=="Organiser") {{route("organiser.view-profile",$user->id)}} @elseif($user->role=="Kid") {{route("kid.view-profile",$user->id)}} @endif"><strong>{{$user->name}}</strong></a>
                     </p>
                     <p>{{$user->role}}</p>
                   </div>
