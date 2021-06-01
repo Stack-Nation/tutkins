@@ -129,6 +129,9 @@
                 <input type="text" name="company" placeholder="Company Name" class="form-control">
             </div>
             <div class="form-group mb-2">
+                <input type="text" name="aadharno" placeholder="Aadhar Number" class="form-control">
+            </div>
+            <div class="form-group mb-2">
                 <label class="form-label" for="aadhar">Aadhar:</label>
                 <input type="file" name="aadhar" placeholder="Aadhar" class="form-control">
             </div>

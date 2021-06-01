@@ -28,6 +28,7 @@ class ProfileController extends Controller
             "address" => "nullable",
             "pin_code" => "nullable",
             "aadhar" => "nullable",
+            "aadharno" => "nullable",
             "occupation" => "nullable",
             "proficiency" => "nullable",
             "photo" => "nullable",
@@ -57,6 +58,7 @@ class ProfileController extends Controller
         $user->pin_code = $request->pin_code;
         $user->occupation = $request->occupation;
         $user->proficiency = $request->proficiency;
+        $user->aadharno = $request->aadharno;
         if($request->hasFile("photo")){
             $path = "assets/users/photo/";
             $name = $_FILES["photo"]["name"];

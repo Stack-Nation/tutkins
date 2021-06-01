@@ -28,6 +28,7 @@ class ProfileController extends Controller
             "address" => "nullable",
             "pin_code" => "nullable",
             "aadhar" => "nullable",
+            "aadharno" => "nullable",
             "photo" => "nullable",
         ]);
         $user = Auth::user();
@@ -53,6 +54,7 @@ class ProfileController extends Controller
         $user->city = $request->city;
         $user->address = $request->address;
         $user->pin_code = $request->pin_code;
+        $user->aadharno = $request->aadharno;
         if($request->hasFile("photo")){
             $path = "assets/users/photo/";
             $name = $_FILES["photo"]["name"];

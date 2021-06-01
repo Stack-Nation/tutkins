@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Withdraw;
 use App\Models\Api;
+use Auth;
 
 class WalletController extends Controller
 {

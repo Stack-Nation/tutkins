@@ -70,6 +70,9 @@
                 <label class="form-label" for="proficiency">Proficiency:</label>
                 <input id="proficiency" value="{{$user->proficiency}}" type="text" class="form-control" name="proficiency" >
             </div>
+            <div class="form-group mb-2">
+                <input type="text" name="aadharno" placeholder="Aadhar Number" class="form-control">
+            </div>
             <div class="form-group">
                 <label class="form-label" for="aadhar">Aadhar:</label>
                 <input type="file" name="aadhar" placeholder="Aadhar" class="form-control">
