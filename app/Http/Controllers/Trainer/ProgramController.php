@@ -75,7 +75,7 @@ class ProgramController extends Controller
         $program->times = json_encode($request->times);
         $program->price = $request->price;
         $program->trial_price = $request->trial_price;
-        $event->discount = $request->discount;
+        $program->discount = $request->discount;
         $program->duration = $request->duration." ".$request->durationt;
         if($request->hasFile("thumbnail")){
             $tpath = "assets/programs/thumbnail/";
@@ -118,7 +118,7 @@ class ProgramController extends Controller
             $name = "data:application/".$ext.";base64,".$name;
             $documents[] = $name;
         }
-        $event->documents = \json_encode($documents);
+        $program->documents = \json_encode($documents);
         $program->save();
 
         // Mail
