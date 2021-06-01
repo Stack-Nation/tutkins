@@ -80,6 +80,7 @@ class MainController extends Controller
         $this->validate($request,[
             "stars" => "required",
             "feedback" => "required",
+            "attendance" => "required",
             "key" => "nullable",
         ]);
         $event = Event::find($id);
@@ -95,6 +96,7 @@ class MainController extends Controller
                 $feedback[] = [
                     "stars"=>$request->stars,
                     "feedback"=>$request->feedback,
+                    "attendance"=>$request->attendance,
                     "user_id" => Auth::user()->id
                 ];
             }
@@ -102,6 +104,7 @@ class MainController extends Controller
                 $feedback[$request->key] = [
                     "stars"=>$request->stars,
                     "feedback"=>$request->feedback,
+                    "attendance"=>$request->attendance,
                     "user_id" => Auth::user()->id
                 ];
             }

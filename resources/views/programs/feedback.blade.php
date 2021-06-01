@@ -3,6 +3,7 @@
     $uratings = 0;
     $ukey = NULL;
     $ufeedback = NULL;
+    $uattendance = NULL;
     if($program->feedback === NULL){
         $ratings = 0;
         $uratings = 0;
@@ -14,6 +15,7 @@
             if($r->user_id === Auth::user()->id){
                 $uratings = (int)$r->stars;
                 $ufeedback = $r->feedback;
+                $uattendance = $r->attendance;
                 $ukey = $key;
             }
         }
@@ -45,6 +47,11 @@
                  </div>
                  <input type="hidden" name="stars" id="urinp" value="{{$uratings}}">
                  <input type="hidden" name="key" value="{{$ukey}}">
+                 <select name="attendance" id="attendance" class="custom-select mb-2">
+                     <option value="">Select attendance</option>
+                     <option value="Yes" @if($uattendance=="Yes") selected @endif>Yes</option>
+                     <option value="No" @if($uattendance=="No") selected @endif>No</option>
+                 </select>
                  <textarea name="feedback" id="feedback" placeholder="Enter your feedback">{{$ufeedback}}</textarea>
                  <button class="btn btn-info mt-3">Submit</button>
             </form>
