@@ -45,8 +45,7 @@ class ProgramController extends Controller
             "thumbnail"=>"required|image",
             "images"=>"required",
             "days"=>"required",
-            "stime"=>"required",
-            "etime"=>"required",
+            "times"=>"required",
             "price"=>"required",
             "trial_price"=>"required",
             "duration"=>"required",
@@ -71,12 +70,7 @@ class ProgramController extends Controller
         $program->category_id = $request->category;
         $program->trainer_id = Auth::user()->id;
         $program->days = json_encode($request->days);
-        $times = [];
-        for( $i=strtotime($request->stime); $i<strtotime($request->etime); $i+=3600*$request->interval) {
-            $stime = \Carbon\Carbon::parse($i)->format("H:i:s");
-            $times[] = $stime;
-        }
-        $program->times = json_encode($times);
+        $program->times = json_encode($request->times);
         $program->price = $request->price;
         $program->trial_price = $request->trial_price;
         $program->duration = $request->duration." ".$request->durationt;

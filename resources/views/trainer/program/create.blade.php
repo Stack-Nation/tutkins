@@ -110,17 +110,12 @@
                             </div>
                             <button class="btn btn-info" type="button" onclick="addDays()">Add Day</button>
                         </div>
-                        <div class="col-lg-6 col-md-12 form-group mb-2">
-                            <label for="times">Program Start Time</label>
+                        <div class="col-12 form-group mb-2">
+                            <label for="times">Program Times</label>
                             <div id="times">
-                                <input type="time" class="form-control form-control-sm mb-2" name="stime">
+                                <input type="time" class="form-control form-control-sm mb-2" name="times[]">
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-12 form-group mb-2">
-                            <label for="times">Program End Time</label>
-                            <div id="times">
-                                <input type="time" class="form-control form-control-sm mb-2" name="etime">
-                            </div>
+                            <button class="btn btn-info" type="button" onclick="addTimes()">Add Time</button>
                         </div>
                         <div class="col-lg-12 col-md-12 form-group mb-2">
                             <label for="times">Program Interval</label>
@@ -203,6 +198,11 @@ ClassicEditor
     function addDays(){
         $("#days").append(`
             <input type="text" class="form-control form-control-sm mb-2" name="days[]">
+        `);
+    }
+    function addTimes(){
+        $("#times").append(`
+            <input type="time" class="form-control form-control-sm mb-2" name="times[]">
         `);
     }
 </script>

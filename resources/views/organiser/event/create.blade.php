@@ -112,14 +112,14 @@
                             <div id="dates">
                                 <input type="date" class="form-control form-control-sm mb-2" name="dates[]" min="{{(new DateTime("NOW"))->format("Y-m-d")}}">
                             </div>
-                            <button class="btn btn-light btn-sm" style="display:none" id="datebtn" type="button" onclick="addDate()">Add more dates</button>
+                            <button class="btn btn-light btn-sm" id="datebtn" type="button" onclick="addDate()">Add more dates</button>
                         </div>
                         <div class="col-lg-6 col-md-12 form-group mb-2">
                             <label for="times">Event Times</label>
                             <div id="times">
                                 <input type="time" class="form-control form-control-sm mb-2" name="times[]">
                             </div>
-                            <button class="btn btn-light btn-sm" style="display:none" id="timebtn" type="button" onclick="addTime()">Add more times</button>
+                            <button class="btn btn-light btn-sm" id="timebtn" type="button" onclick="addTime()">Add more times</button>
                         </div>
                         <div class="col-12 form-group mb-2">
                             <label class="form-label" for="images[]">Images:</label>
