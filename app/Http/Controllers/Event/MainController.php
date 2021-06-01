@@ -26,6 +26,8 @@ class MainController extends Controller
                 $event->dates = json_decode($event->dates);
                 $event->feedback = json_decode($event->feedback);
                 $event->times = json_decode($event->times);
+                $event->links = json_decode($event->links);
+                $event->documents = json_decode($event->documents);
                 return view("events.view")->with([
                     "event" => $event
                 ]);

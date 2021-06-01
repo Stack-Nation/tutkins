@@ -26,6 +26,8 @@ class MainController extends Controller
                 $program->days = json_decode($program->days);
                 $program->feedback = json_decode($program->feedback);
                 $program->times = json_decode($program->times);
+                $event->links = json_decode($event->links);
+                $event->documents = json_decode($event->documents);
                 return view("programs.view")->with([
                     "program" => $program
                 ]);
