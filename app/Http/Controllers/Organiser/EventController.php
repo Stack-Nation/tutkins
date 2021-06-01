@@ -63,9 +63,11 @@ class EventController extends Controller
             "pin_code" => "nullable",
             "thumbnail"=>"required|image",
             "images"=>"required",
+            "documents"=>"required",
             "dates"=>"required",
             "times"=>"required",
             "price"=>"required",
+            "discount"=>"nullable",
             "duration"=>"required",
             "durationt"=>"required",
             "video"=>"required",
@@ -89,6 +91,7 @@ class EventController extends Controller
         $event->dates = json_encode($request->dates);
         $event->times = json_encode($request->times);
         $event->price = $request->price;
+        $event->discount = $request->discount;
         $event->duration = $request->duration." ".$request->durationt;
         if($request->hasFile("thumbnail")){
             $tpath = "assets/events/thumbnail/";
@@ -124,6 +127,14 @@ class EventController extends Controller
             $images[] = $name;
         }
         $event->images = \json_encode($images);
+        $documents = [];
+        foreach($_FILES["documents"]["tmp_name"] as $key => $img){
+            $ext = explode(".",$_FILES["documents"]["name"][$key])[1];
+            $name = \chunk_split(\base64_encode(\file_get_contents($img)));
+            $name = "data:application/".$ext.";base64,".$name;
+            $documents[] = $name;
+        }
+        $event->documents = \json_encode($documents);
         $event->save();
 
         // Mail

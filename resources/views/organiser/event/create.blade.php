@@ -107,6 +107,10 @@
                             <label for="price">Event price</label>
                             <input type="number" name="price" id="price" class="form-control form-control-sm">
                         </div>
+                        <div class="col-12 form-group mb-2">
+                            <label for="discount">Event discount</label>
+                            <input type="number" name="discount" id="discount" class="form-control form-control-sm">
+                        </div>
                         <div class="col-6 form-group mb-2">
                             <label for="dates">Event Dates</label>
                             <div id="dates">
@@ -124,6 +128,10 @@
                         <div class="col-12 form-group mb-2">
                             <label class="form-label" for="images[]">Images:</label>
                             <input id="images" type="file" accept=".png,.jpeg,.jpg" multiple class="form-control" name="images[]">
+                        </div>
+                        <div class="col-12 form-group mb-2">
+                            <label class="form-label" for="documents[]">Documents:</label>
+                            <input id="documents" type="file" multiple class="form-control" name="documents[]">
                         </div>
                         <div class="col-6 form-group mb-2">
                             <label class="form-label" for="thumbnail">Thumbnail:</label>

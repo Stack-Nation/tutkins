@@ -44,9 +44,11 @@ class ProgramController extends Controller
             "pin_code" => "nullable",
             "thumbnail"=>"required|image",
             "images"=>"required",
+            "documents"=>"required",
             "days"=>"required",
             "times"=>"required",
             "price"=>"required",
+            "discount"=>"nullable",
             "trial_price"=>"required",
             "duration"=>"required",
             "durationt"=>"required",
@@ -73,6 +75,7 @@ class ProgramController extends Controller
         $program->times = json_encode($request->times);
         $program->price = $request->price;
         $program->trial_price = $request->trial_price;
+        $event->discount = $request->discount;
         $program->duration = $request->duration." ".$request->durationt;
         if($request->hasFile("thumbnail")){
             $tpath = "assets/programs/thumbnail/";
@@ -108,6 +111,14 @@ class ProgramController extends Controller
             $images[] = $name;
         }
         $program->images = \json_encode($images);
+        $documents = [];
+        foreach($_FILES["documents"]["tmp_name"] as $key => $img){
+            $ext = explode(".",$_FILES["documents"]["name"][$key])[1];
+            $name = \chunk_split(\base64_encode(\file_get_contents($img)));
+            $name = "data:application/".$ext.";base64,".$name;
+            $documents[] = $name;
+        }
+        $event->documents = \json_encode($documents);
         $program->save();
 
         // Mail
