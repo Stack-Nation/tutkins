@@ -21,10 +21,12 @@ class PaymentController extends Controller
 {
     public function choose($type,$id,Request $request){
         if($type==="program"){
+            $date = $request->session()->get("day");
             $item = Program::find($id);
             $typee = $request->session()->get("type");
         }
         if($type==="event"){
+            $date = $request->session()->get("date");
             $item = Event::find($id);
             $typee="";
         }
@@ -32,7 +34,7 @@ class PaymentController extends Controller
             "type"=>$type,
             "id"=>$id,
             "item"=>$item,
-            "date"=>$request->session()->get("date"),
+            "date"=>$date,
             "time"=>$request->session()->get("time"),
             "typee"=>$typee,
         ]);

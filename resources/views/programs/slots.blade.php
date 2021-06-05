@@ -23,7 +23,7 @@
                  @csrf
                  <div class="form-group mb-3">
                      <label for="day">Select a day</label>
-                     <select name="day" id="day[]" class="custom-select custom-select-lg dropdown-groups" onchange="document.getElementById('time').style.display='block'" multiple>
+                     <select name="day[]" id="day" class="custom-select custom-select-lg dropdown-groups" onchange="document.getElementById('time').style.display='block'" multiple>
                         @foreach(json_decode($program->days) as $day)
                         <option value="{{$day}}">{{$day}}</option>
                         @endforeach
@@ -32,7 +32,7 @@
                  <div id="time" style="display:none">
                     <div class="form-group mb-3">
                         <label for="time">Select a time slot</label>
-                        <select name="time" id="time[]" class="custom-select custom-select-lg dropdown-groups" multiple>
+                        <select name="time[]" id="time" class="custom-select custom-select-lg dropdown-groups" multiple>
                             @foreach(json_decode($program->times) as $time)
                             <option value="{{$time}}">{{$time}}</option>
                             @endforeach
