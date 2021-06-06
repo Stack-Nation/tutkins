@@ -23,7 +23,7 @@ class PaymentController extends Controller
         if($type==="program"){
             $date = $request->session()->get("day");
             $item = Program::find($id);
-            $typee = $request->session()->get("type");
+            $typee = $request->session()->get("typee");
         }
         if($type==="event"){
             $date = $request->session()->get("date");

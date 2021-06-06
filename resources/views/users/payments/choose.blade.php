@@ -72,8 +72,9 @@
                 </table>
             </div>
             <form action="{{route('user.payment.razorpay',[$type,$item->id])}}" method="POST" >
-              <input type="date" name="date" value="{{json_encode($date)}}" hidden>
-              <input type="time" name="time" value="{{json_encode($time)}}" hidden>
+              <input type="text" name="date" value="{{json_encode($date)}}" hidden>
+              <input type="text" name="typee" value="{{$typee}}" hidden>
+              <input type="text" name="time" value="{{json_encode($time)}}" hidden>
               <script src="https://checkout.razorpay.com/v1/checkout.js"
                       data-key="{{ \App\Models\Api::first()->razorpay_key_id }}"
                       data-amount="{{$total*100}}"
