@@ -116,6 +116,9 @@ else{
                            </div>
                        </div>
                    </div>
+                   @if($program->enrolled_users->count()>=$program->batch_size)
+                   <button class="btn btn-success" href="#!" disabled>Slots full</button>
+                   @else
                    @auth
                    @if(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()!==NULL)
                    <div id="documents" class="tab-pane fade">
@@ -141,6 +144,7 @@ else{
                    </div>
                    @endif
                    @endauth
+                   @endif
                    @if($program->mode==="Trainer's Location")
                    <div id="location" class="tab-pane fade">
                        <div class="card">

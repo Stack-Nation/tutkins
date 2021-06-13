@@ -17,8 +17,6 @@ class CreateEnrolledEventsTable extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('event_id');
-            $table->date('date');
-            $table->time('time');
             $table->timestamps();
         });
     }

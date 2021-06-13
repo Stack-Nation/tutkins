@@ -13,7 +13,7 @@ use App\Models\Notification;
 
 class EnrollController extends Controller
 {
-    public function chooseSlot($id){
+    public function chooseSlot($id,Request $request){
         $event = Event::find($id);
         if($event===NULL){
             abort(404,"The content you are trying to access does not exist");
@@ -23,16 +23,13 @@ class EnrollController extends Controller
             return redirect()->back();
         }
         else{
-            return view("events.slots")->with([
-                "event" => $event,
-            ]);
+            // return view("events.slots")->with([
+            //     "event" => $event,
+            // ]);
+            return $this->enroll($id,$request);
         }
     }
     public function enroll($id,Request $request){
-        $this->validate($request,[
-            "date"=>"required",
-            "time"=>"required",
-        ]);
         $event = Event::find($id);
         if($event===NULL){
             abort(404,"The content you are trying to access does not exist");
@@ -47,8 +44,6 @@ class EnrollController extends Controller
                 $enroll = new EnrolledEvent;
                 $enroll->user_id = Auth::user()->id;
                 $enroll->event_id = $item->id;
-                $enroll->date = $request->date;
-                $enroll->time = $request->time;
                 $enroll->save();
 
                 // Mail
@@ -66,7 +61,7 @@ class EnrollController extends Controller
                 return redirect()->route('events.view', [$item->id,md5($item->title)]);
             }
             else{
-                return redirect()->route('user.payment.choose', ["event",$id])->with(["date"=>$request->date,"time"=>$request->time]);
+                return redirect()->route('user.payment.choose', ["event",$id]);
             }
         }
     }

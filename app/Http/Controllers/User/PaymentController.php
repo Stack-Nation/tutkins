@@ -22,11 +22,13 @@ class PaymentController extends Controller
     public function choose($type,$id,Request $request){
         if($type==="program"){
             $date = $request->session()->get("day");
+            $time = $request->session()->get("time");
             $item = Program::find($id);
             $typee = $request->session()->get("typee");
         }
         if($type==="event"){
-            $date = $request->session()->get("date");
+            $date = "";
+            $time = "";
             $item = Event::find($id);
             $typee="";
         }
@@ -35,7 +37,7 @@ class PaymentController extends Controller
             "id"=>$id,
             "item"=>$item,
             "date"=>$date,
-            "time"=>$request->session()->get("time"),
+            "time"=>$time,
             "typee"=>$typee,
         ]);
     }
@@ -129,8 +131,6 @@ class PaymentController extends Controller
                 $enroll = new EnrolledEvent;
                 $enroll->user_id = Auth::user()->id;
                 $enroll->event_id = $item->id;
-                $enroll->date = $request->date;
-                $enroll->time = $request->time;
                 $enroll->save();
 
                 // Mail

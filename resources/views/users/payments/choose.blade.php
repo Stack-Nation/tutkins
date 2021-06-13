@@ -11,9 +11,6 @@
         }
     }
     else if($type=="event"){
-    if($date==NULL or $time==NULL){
-        echo "<script>history.back()</script>";
-    }
         $image = asset("assets/events/thumbnail/".$item->thumbnail);
     }
 ?>
@@ -65,16 +62,17 @@
                             <th colspan="3" class="text-right font-size-24 font-weight-700">Payable Amount</th>
                             <th class="font-size-24 font-weight-700">{{$total}} INR</th>
                         </tr>
-                        <tr>
+                        @if($type=="program")<tr>
                             <td colspan="4">Timing: {{json_encode($date)}} {{json_encode($time)}}</td>
                         </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
             <form action="{{route('user.payment.razorpay',[$type,$item->id])}}" method="POST" >
-              <input type="text" name="date" value="{{json_encode($date)}}" hidden>
+              @if($type=="program")<input type="text" name="date" value="{{json_encode($date)}}" hidden>
               <input type="text" name="typee" value="{{$typee}}" hidden>
-              <input type="text" name="time" value="{{json_encode($time)}}" hidden>
+              <input type="text" name="time" value="{{json_encode($time)}}" hidden>@endif
               <script src="https://checkout.razorpay.com/v1/checkout.js"
                       data-key="{{ \App\Models\Api::first()->razorpay_key_id }}"
                       data-amount="{{$total*100}}"

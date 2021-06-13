@@ -396,19 +396,19 @@ else{
                                 <p class="float-right">{{$event->price==0?"Free":$event->price." INR"}}</p>
                             </li>
                         </ul>
+                        @if($event->enrolled_users->count()>=$event->batch_size)
+                        <button class="btn btn-success" href="#!" disabled>Slots full</button>
+                        @else
                         @auth
                         @if(Auth::user()->enrolled_events->where("event_id",$event->id)->first()!==NULL)
-                            @if((new DateTime(Auth::user()->enrolled_events->where("event_id",$event->id)->first()->date." ".Auth::user()->enrolled_events->where("event_id",$event->id)->first()->time))<=(new DateTime("NOW")))
                             <a class="btn btn-success" href="{{$event->link}}">Join Now</a>
-                            @else
-                            <p>Join in: <strong id="timer"></strong></p>
-                            @endif
                         @else
                             <a class="btn btn-success" href="{{route("events.subscribe.slot",$event->id)}}">Enroll Now</a>
                         @endif
                          @else
                          <a class="btn btn-success" href="{{route("login")}}">Login</a>
                         @endauth
+                        @endif
                     </div>
                 </div>
             </div>
