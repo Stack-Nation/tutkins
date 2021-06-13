@@ -121,6 +121,20 @@
                             </div>
                             <button class="btn btn-info" type="button" onclick="addTimes()">Add Time</button>
                         </div>
+                        <div class="col-12 form-group mb-2">
+                            <label for="trial_dates">Trial Program Dates</label>
+                            <div id="trial_dates">
+                                <input type="text" class="form-control form-control-sm mb-2" name="trial_dates[]">
+                            </div>
+                            <button class="btn btn-info" type="button" onclick="addTrialDates()">Add Day</button>
+                        </div>
+                        <div class="col-12 form-group mb-2">
+                            <label for="trial_times">Trial Program Times</label>
+                            <div id="trial_times">
+                                <input type="time" class="form-control form-control-sm mb-2" name="trial_times[]">
+                            </div>
+                            <button class="btn btn-info" type="button" onclick="addTrialTimes()">Add Time</button>
+                        </div>
                         <div class="col-lg-12 col-md-12 form-group mb-2">
                             <label for="times">Program Interval</label>
                             <input type="number" class="form-control form-control-sm mb-2" name="interval">
@@ -211,6 +225,16 @@ ClassicEditor
     function addTimes(){
         $("#times").append(`
             <input type="time" class="form-control form-control-sm mb-2" name="times[]">
+        `);
+    }
+    function addTrialDates(){
+        $("#trial_dates").append(`
+            <input type="date" class="form-control form-control-sm mb-2" name="trial_dates[]">
+        `);
+    }
+    function addTrialTimes(){
+        $("#trial_times").append(`
+            <input type="time" class="form-control form-control-sm mb-2" name="trial_times[]">
         `);
     }
 </script>

@@ -47,6 +47,8 @@ class ProgramController extends Controller
             "documents"=>"required",
             "days"=>"required",
             "times"=>"required",
+            "trial_dates"=>"required",
+            "trial_times"=>"required",
             "price"=>"required",
             "discount"=>"nullable",
             "trial_price"=>"required",
@@ -73,6 +75,8 @@ class ProgramController extends Controller
         $program->trainer_id = Auth::user()->id;
         $program->days = json_encode($request->days);
         $program->times = json_encode($request->times);
+        $program->trial_dates = json_encode($request->trial_dates);
+        $program->trial_times = json_encode($request->trial_times);
         $program->price = $request->price;
         $program->trial_price = $request->trial_price;
         $program->discount = $request->discount;

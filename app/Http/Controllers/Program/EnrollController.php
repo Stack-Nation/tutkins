@@ -13,18 +13,19 @@ use App\Models\Notification;
 
 class EnrollController extends Controller
 {
-    public function chooseSlot($id){
+    public function chooseSlot($id,$type){
         $program = Program::find($id);
         if($program===NULL){
             abort(404,"The content you are trying to access does not exist");
         }
-        if(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()!==NULL){
+        if(Auth::user()->enrolled_programs->where(["program_id"=>$program->id,"type"=>$type])->first()!==NULL){
             Session()->flash("warning","You have already subscribed to this program");
             return redirect()->back();
         }
         else{
             return view("programs.slots")->with([
                 "program" => $program,
+                "type" => $type,
             ]);
         }
     }

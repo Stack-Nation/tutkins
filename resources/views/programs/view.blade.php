@@ -116,9 +116,6 @@ else{
                            </div>
                        </div>
                    </div>
-                   @if($program->enrolled_users->count()>=$program->batch_size)
-                   <button class="btn btn-success" href="#!" disabled>Slots full</button>
-                   @else
                    @auth
                    @if(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()!==NULL)
                    <div id="documents" class="tab-pane fade">
@@ -144,7 +141,6 @@ else{
                    </div>
                    @endif
                    @endauth
-                   @endif
                    @if($program->mode==="Trainer's Location")
                    <div id="location" class="tab-pane fade">
                        <div class="card">
@@ -404,15 +400,20 @@ else{
                                 <p class="float-right">{{$program->price==0?"Free":$program->price." INR"}}</p>
                             </li>
                         </ul>
+                        @if($program->enrolled_users->count()>=$program->batch_size)
+                        <button class="btn btn-success" href="#!" disabled>Slots full</button>
+                        @else
                         @auth
                         @if(Auth::user()->enrolled_programs->where("program_id",$program->id)->first()!==NULL)
                             <a class="btn btn-success" href="{{$program->link}}">Join Now</a>
                         @else
-                            <a class="btn btn-success" href="{{route("programs.subscribe.slot",$program->id)}}">Enroll Now</a>
+                            <a class="btn btn-success" href="{{route("programs.subscribe.slot",[$program->id,"Full"])}}">Enroll Now</a>
+                            <a class="btn btn-success" href="{{route("programs.subscribe.slot",[$program->id,"Trial"])}}">Enroll Trial Program</a>
                         @endif
                          @else
                          <a class="btn btn-success" href="{{route("login")}}">Login</a>
                         @endauth
+                        @endif
                     </div>
                 </div>
             </div>

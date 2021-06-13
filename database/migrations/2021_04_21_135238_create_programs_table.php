@@ -37,6 +37,8 @@ class CreateProgramsTable extends Migration
             $table->string('age_group');
             $table->json('days');
             $table->json('times');
+            $table->json('trial_dates');
+            $table->json('trial_times');
             $table->string('video');
             $table->json('documents');
             $table->double('discount', 15, 8)->nullable();

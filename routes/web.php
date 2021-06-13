@@ -186,7 +186,7 @@ Route::name("programs.")->prefix("programs")->group(function() {
     Route::get("view/{id}/{title}",[ProgramMain::class,"view"])->name("view");
     Route::post("search",[ProgramMain::class,"search"])->name("search");
     Route::middleware(["auth","verified"])->name("subscribe.")->prefix("subscribe")->group(function(){
-        Route::get("/{id}/slot",[ProgramEnroll::class,"chooseSlot"])->name("slot");
+        Route::get("/{id}/slot/{type}",[ProgramEnroll::class,"chooseSlot"])->name("slot");
         Route::post("/{id}",[ProgramEnroll::class,"enroll"])->name("add");
         Route::get("/{id}/feedback",[ProgramMain::class,"feedback"])->name("feedback");
         Route::post("/{id}/feedback",[ProgramMain::class,"addFeedback"])->name("feedback");

@@ -21,6 +21,7 @@
         <div class="col-md-12">
             <form action="{{route("programs.subscribe.add",$program->id)}}" method="post">
                  @csrf
+                 @if($type=="Full")
                  <div class="form-group mb-3">
                      <label for="day">Select a day</label>
                      <select name="day[]" id="day" class="custom-select custom-select-lg dropdown-groups" onchange="document.getElementById('time').style.display='block'" multiple>
@@ -39,15 +40,28 @@
                         </select>
                     </div>
                  </div>
-                 <div id="type">
+                 @elseif($type=="Trial")
+                 <div class="form-group mb-3">
+                     <label for="day">Select a date</label>
+                     <select name="day[]" id="day" class="custom-select custom-select-lg dropdown-groups" onchange="document.getElementById('time').style.display='block'" multiple>
+                        @foreach(json_decode($program->trial_dates) as $day)
+                        <option value="{{$day}}">{{$day}}</option>
+                        @endforeach
+                     </select>
+                 </div>
+                 <div id="time" style="display:none">
                     <div class="form-group mb-3">
-                        <label for="type">Type</label>
-                        <select name="type" id="type" class="custom-select custom-select-lg dropdown-groups">
-                            <option value="">Select Type</option>
-                            <option value="Trial">Trial</option>
-                            <option value="Full">Full</option>
+                        <label for="time">Select a time slot</label>
+                        <select name="time[]" id="time" class="custom-select custom-select-lg dropdown-groups" multiple>
+                            @foreach(json_decode($program->trial_times) as $time)
+                            <option value="{{$time}}">{{$time}}</option>
+                            @endforeach
                         </select>
                     </div>
+                 </div>
+                 @endif
+                 <div id="type">
+                     <input type="hidden" name="type" value="{{$type}}">
                  </div>
                  <button type="submit" class="btn btn-primary">Enroll</button>
             </form>
