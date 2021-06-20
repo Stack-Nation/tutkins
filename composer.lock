@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b33f7a5851e250e2f0722940012267b5",
+    "content-hash": "6003d2e4caf3e6ed66183b411d442430",
     "packages": [
         {
             "name": "anandsiddharth/laravel-paytm-wallet",
@@ -1336,6 +1336,46 @@
             ],
             "description": "Mime-type detection for Flysystem",
             "time": "2021-01-18T20:58:21+00:00"
+        },
+        {
+            "name": "loveycom/cashfree",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kayusgold/laravel-cashfree-api.git",
+                "reference": "4dacc30f37bf4b59516b523abb62149037911f68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kayusgold/laravel-cashfree-api/zipball/4dacc30f37bf4b59516b523abb62149037911f68",
+                "reference": "4dacc30f37bf4b59516b523abb62149037911f68",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LoveyCom\\CashFree\\CashFreeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LoveyCom\\CashFree\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kayode Omolaoye",
+                    "email": "kayodeomolaoye@gmail.com"
+                }
+            ],
+            "description": "A package for CashFree Payment Gateway.",
+            "time": "2020-10-09T08:19:29+00:00"
         },
         {
             "name": "maennchen/zipstream-php",

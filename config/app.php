@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Anand\LaravelPaytmWallet\PaytmWalletServiceProvider::class,
         Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
+        LoveyCom\CashFree\CashFreeServiceProvider::class,
 
     ],
 
