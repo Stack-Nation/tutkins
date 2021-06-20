@@ -69,24 +69,35 @@
                     </tbody>
                 </table>
             </div>
-            <form action="{{route('user.payment.razorpay',[$type,$item->id])}}" method="POST" >
-              @if($type=="program")<input type="text" name="date" value="{{json_encode($date)}}" hidden>
-              <input type="text" name="typee" value="{{$typee}}" hidden>
-              <input type="text" name="time" value="{{json_encode($time)}}" hidden>@endif
-              <script src="https://checkout.razorpay.com/v1/checkout.js"
-                      data-key="{{ \App\Models\Api::first()->razorpay_key_id }}"
-                      data-amount="{{$total*100}}"
-                      data-buttontext="Checkout"
-                      data-name="{{config("app.name")}}"
-                      data-description="{{strtoupper($type)}} Value"
-                      data-image="{{asset("assets/main/images/logo.png")}}"
-                      data-prefill.name="{{Auth::user()->name}}"
-                      data-prefill.email="{{Auth::user()->email}}"
-                      data-prefill.phone="{{Auth::user()->mobile}}"
-                      data-theme.color="#E33A50">
-              </script>
-              <input type="hidden" name="_token" value="{!!csrf_token()!!}">
+            @if(env("PAYMENT_GATEWAY")=="RAZORPAY")
+                <form action="{{route('user.payment.razorpay',[$type,$item->id])}}" method="POST" >
+                @if($type=="program")<input type="text" name="date" value="{{json_encode($date)}}" hidden>
+                <input type="text" name="typee" value="{{$typee}}" hidden>
+                <input type="text" name="time" value="{{json_encode($time)}}" hidden>@endif
+                <script src="https://checkout.razorpay.com/v1/checkout.js"
+                        data-key="{{ \App\Models\Api::first()->razorpay_key_id }}"
+                        data-amount="{{$total*100}}"
+                        data-buttontext="Checkout"
+                        data-name="{{config("app.name")}}"
+                        data-description="{{strtoupper($type)}} Value"
+                        data-image="{{asset("assets/main/images/logo.png")}}"
+                        data-prefill.name="{{Auth::user()->name}}"
+                        data-prefill.email="{{Auth::user()->email}}"
+                        data-prefill.phone="{{Auth::user()->mobile}}"
+                        data-theme.color="#E33A50">
+                </script>
+                <input type="hidden" name="_token" value="{!!csrf_token()!!}">
+                </form>
+            @elseif(env("PAYMENT_GATEWAY")=="CASHFREE")
+            <form action="{{route('user.payment.cashfree',[$type,$item->id])}}" method="POST" >
+            @if($type=="program")<input type="text" name="date" value="{{json_encode($date)}}" hidden>
+            <input type="text" name="typee" value="{{$typee}}" hidden>
+            <input type="text" name="time" value="{{json_encode($time)}}" hidden>@endif
+            <input type="hidden" name="_token" value="{!!csrf_token()!!}">
+            <input type="hidden" name="amount" value="{{$total}}">
+            <button class="btn btn-danger">Pay</button>
             </form>
+            @endif
 
             <hr>
           </div>

@@ -16,6 +16,7 @@ use PaytmWallet;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\GlobalMail;
 use App\Models\Notification;
+use LoveyCom\CashFree\PaymentGateway\Order;
 
 class PaymentController extends Controller
 {
@@ -98,7 +99,7 @@ class PaymentController extends Controller
             $transaction->payment_gateway = "Razorpay";
             $transaction->save();
 
-            $owner->wallet = $payment['amount']/100;
+            $owner->wallet += $payment['amount']/100;
             $owner->save();
 
             if($type==="program"){
@@ -148,6 +149,111 @@ class PaymentController extends Controller
                 return redirect()->route('events.view', [$item->id,md5($item->title)]);
             }
         }
+    }
+
+    public function cashfree($type,$id,Request $request){
+        if($type==="program"){
+            $item = Program::find($id);
+        }
+        if($type==="event"){
+            $item = Event::find($id);
+        }
+        if($item===NULL){
+            Session()->flash("error","The item does not exist");
+            return redirect()->back();
+        }
+        $user = Auth::user();
+        $order = new Order();
+        $od["orderId"] = "ORDER-".uniqid();
+        $od["orderAmount"] = $request->amount;
+        $od["orderNote"] = "Subscription";
+        $od["customerPhone"] = $user->mobile;
+        $od["customerName"] = $user->name;
+        $od["customerEmail"] = $user->email;
+        $od["date"] = $request->date;
+        $od["time"] = $request->time;
+        $od["typee"] = $request->typee;
+        $od["returnUrl"] = route("user.payment.cashfreer",[$type,$id,$request->date,$request->time,$request->typee]);
+        $od["notifyUrl"] = route("user.payment.cashfreer",[$type,$id,$request->date,$request->time,$request->typee]);
+        $order->create($od);
+        //get the payment link of this order for your customer
+        $link = $order->getLink($od['orderId']);
+        return \Redirect::to($link->paymentLink);
+    }
+    public function cashfreer($type,$id,$date="",$time="",$typee="",Request $request){
+        if($type==="program"){
+            $item = Program::find($id);
+            $owner = $item->trainer;
+        }
+        if($type==="event"){
+            $item = Event::find($id);
+            $owner = $item->organiser;
+        }
+        if($item===NULL){
+            Session()->flash("error","The item does not exist");
+            return redirect()->back();
+        }
+
+
+            $transaction = new Transaction;
+            $transaction->transaction_id = $request->orderId;
+            $transaction->user_id = Auth::user()->id;
+            $transaction->item_type = $type;
+            $transaction->item_id = $item->id;
+            $transaction->amount = $request->orderAmount;
+            $transaction->status = "Paid";
+            $transaction->payment_gateway = "Cashfree";
+            $transaction->save();
+
+            $owner->wallet += $request->orderAmount;
+            $owner->save();
+
+            if($type==="program"){
+                $item = Program::find($id);
+                $enroll = new EnrolledProgram;
+                $enroll->user_id = Auth::user()->id;
+                $enroll->program_id = $item->id;
+                $enroll->day = $date;
+                $enroll->time = $time;
+                $enroll->type = $typee;
+                $enroll->save();
+                
+
+                // Mail
+                $user = Auth::user();
+                $sub = "Welcome to ".$item->title;
+                $message="<p>Dear ".$user->name.",</p><p>You have successfully enrolled to ".$item->title.".</p>";
+                $data = array('sub'=>$sub,'message'=>$message);
+                Mail::to($user->email)->send(new GlobalMail($data));
+        
+                $notification = new Notification;
+                $notification->user_id = $user->id;
+                $notification->message = "You have successfully enrolled to ".$item->title;
+                $notification->save();
+                $request->session()->flash('success', "You have successfully enrolled to the program");
+                return redirect()->route('programs.view', [$item->id,md5($item->title)]);
+            }
+            if($type==="event"){
+                $item = Event::find($id);
+                $enroll = new EnrolledEvent;
+                $enroll->user_id = Auth::user()->id;
+                $enroll->event_id = $item->id;
+                $enroll->save();
+
+                // Mail
+                $user = Auth::user();
+                $sub = "Welcome to ".$item->title;
+                $message="<p>Dear ".$user->name.",</p><p>You have successfully enrolled to ".$item->title.".</p>";
+                $data = array('sub'=>$sub,'message'=>$message);
+                Mail::to($user->email)->send(new GlobalMail($data));
+        
+                $notification = new Notification;
+                $notification->user_id = $user->id;
+                $notification->message = "You have successfully enrolled to ".$item->title;
+                $notification->save();
+                $request->session()->flash('success', "You have successfully enrolled to the event");
+                return redirect()->route('events.view', [$item->id,md5($item->title)]);
+            }
     }
     // public function paytm($type,$id){
     //     if($type==="course"){

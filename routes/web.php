@@ -78,8 +78,10 @@ Route::middleware(["auth","verified"])->group(function(){
             Route::get("{type}/{id}/checkout",[UserPayment::class,"choose"])->name("payment.choose");
             Route::get("{type}/{id}/pay/razorpay",[UserPayment::class,"razorpay"])->name("payment.razorpay");
             Route::post("{type}/{id}/pay/razorpay",[UserPayment::class,"razorpayPay"])->name("payment.razorpay");
-            Route::get("{type}/{id}/pay/paytm",[UserPayment::class,"paytm"])->name("payment.paytm");
-            Route::post("{type}/{id}/pay/paytm/pay",[UserPayment::class,"paytmPay"])->name("payment.paytm.pay");
+            Route::post("{type}/{id}/pay/cashfree",[UserPayment::class,"cashfree"])->name("payment.cashfree");
+            Route::post("{type}/{id}/{date?}/{time?}/{typee?}/pay/cashfreer",[UserPayment::class,"cashfreer"])->name("payment.cashfreer");
+            // Route::get("{type}/{id}/pay/paytm",[UserPayment::class,"paytm"])->name("payment.paytm");
+            // Route::post("{type}/{id}/pay/paytm/pay",[UserPayment::class,"paytmPay"])->name("payment.paytm.pay");
 
             Route::get("chats",[UserMessage::class,"index"])->name("chats");
             Route::post("sendMessage",[UserMessage::class,"sendMessage"])->name("sendMessage");

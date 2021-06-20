@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        "*/pay/paytm/pay"
+        "*/pay/paytm/pay",
+        "*/pay/cashfreer"
     ];
 }
