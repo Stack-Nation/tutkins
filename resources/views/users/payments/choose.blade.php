@@ -2,16 +2,22 @@
     $image = "";
     $total = $item->price;
     if($type=="program"){
-    if($date==NULL or $time==NULL){
-        echo "<script>history.back()</script>";
-    }
+        if($date==NULL or $time==NULL){
+            echo "<script>history.back()</script>";
+        }
         $image = asset("assets/programs/thumbnail/".$item->thumbnail);
+        if($item->discount){
+            $total=$item->discount;
+        }
         if($typee=="Trial"){
             $total = $item->trial_price;
         }
     }
     else if($type=="event"){
         $image = asset("assets/events/thumbnail/".$item->thumbnail);
+        if($item->discount){
+            $total=$item->discount;
+        }
     }
 ?>
 @extends('layouts.app')
