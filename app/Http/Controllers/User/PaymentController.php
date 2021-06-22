@@ -170,9 +170,6 @@ class PaymentController extends Controller
         $od["customerPhone"] = $user->mobile;
         $od["customerName"] = $user->name;
         $od["customerEmail"] = $user->email;
-        $od["date"] = $request->date;
-        $od["time"] = $request->time;
-        $od["typee"] = $request->typee;
         $od["returnUrl"] = route("user.payment.cashfreer",[$type,$id,$request->date,$request->time,$request->typee]);
         $od["notifyUrl"] = route("user.payment.cashfreer",[$type,$id,$request->date,$request->time,$request->typee]);
         $order->create($od);

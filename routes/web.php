@@ -79,7 +79,7 @@ Route::middleware(["auth","verified"])->group(function(){
             Route::get("{type}/{id}/pay/razorpay",[UserPayment::class,"razorpay"])->name("payment.razorpay");
             Route::post("{type}/{id}/pay/razorpay",[UserPayment::class,"razorpayPay"])->name("payment.razorpay");
             Route::post("{type}/{id}/pay/cashfree",[UserPayment::class,"cashfree"])->name("payment.cashfree");
-            Route::post("{type}/{id}/{date?}/{time?}/{typee?}/pay/cashfreer",[UserPayment::class,"cashfreer"])->name("payment.cashfreer");
+            Route::post("{type}/{id}/pay/cashfreer/{date?}/{time?}/{typee?}",[UserPayment::class,"cashfreer"])->name("payment.cashfreer");
             // Route::get("{type}/{id}/pay/paytm",[UserPayment::class,"paytm"])->name("payment.paytm");
             // Route::post("{type}/{id}/pay/paytm/pay",[UserPayment::class,"paytmPay"])->name("payment.paytm.pay");
 
