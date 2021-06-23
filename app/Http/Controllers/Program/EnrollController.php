@@ -49,8 +49,8 @@ class EnrollController extends Controller
                 $enroll = new EnrolledProgram;
                 $enroll->user_id = Auth::user()->id;
                 $enroll->program_id = $item->id;
-                $enroll->day = $request->day;
-                $enroll->time = $request->time;
+                $enroll->day = json_encode($request->day);
+                $enroll->time = json_encode($request->time);
                 $enroll->type = $request->type;
                 $enroll->save();
 
