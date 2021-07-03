@@ -3,6 +3,7 @@
     $uratings = 0;
     $ukey = NULL;
     $ufeedback = NULL;
+    $uattendance = NULL;
     if($event->feedback === NULL){
         $ratings = 0;
         $uratings = 0;
@@ -15,6 +16,7 @@
                 $uratings = (int)$r->stars;
                 $ufeedback = $r->feedback;
                 $ukey = $key;
+                $uattendance = $r->attendance;
             }
         }
         $ratings = $ratings / $totalr;
