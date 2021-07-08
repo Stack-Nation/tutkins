@@ -65,6 +65,9 @@ Route::get("admin",function(){
 Route::get("getting-started",function(){
     return view("auth.get-started");
 })->middleware("guest")->name("getting-started");
+Route::get("kid/view-profile/{id}",[KidProfile::class,"view"])->name("kid.view-profile");
+Route::get("trainer/view-profile/{id}",[TrainerProfile::class,"view"])->name("trainer.view-profile");
+Route::get("organiser/view-profile/{id}",[TrainerProfile::class,"view"])->name("organiser.view-profile");
 
 Route::middleware(["auth","verified"])->group(function(){
     Route::name("user.")->prefix("user")->group(function(){
@@ -100,9 +103,6 @@ Route::middleware(["auth","verified"])->group(function(){
             Route::post('wallet/accounts/upi',[UserWallet::class,"addUpi"])->name('wallet.addUpi');
         });
     });
-    Route::get("kid/view-profile/{id}",[KidProfile::class,"view"])->name("kid.view-profile");
-    Route::get("trainer/view-profile/{id}",[TrainerProfile::class,"view"])->name("trainer.view-profile");
-    Route::get("organiser/view-profile/{id}",[TrainerProfile::class,"view"])->name("organiser.view-profile");
     Route::middleware(["adminAuth"])->name("admin.")->prefix("admin")->group(function(){
         Route::get("dashboard",[AdminDashboard::class,"index"])->name("dashboard");
         Route::get("users/{type?}",[AdminUser::class,"index"])->name("users");
